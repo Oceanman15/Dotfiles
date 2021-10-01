@@ -13,6 +13,8 @@ from typing import List  # noqa: F401
 mod = "mod1"                                     # Sets mod key to SUPER/WINDOWS
 myTerm = "alacritty"                             # My terminal of choice
 
+#Keybindings:
+
 keys = [
          ### The essentials
          Key([mod], "Return",
@@ -28,6 +30,10 @@ keys = [
              lazy.next_layout(),
              desc='Toggle through layouts'
              ),
+     Key([mod, "shift"], "Tab",
+             lazy.prev_layout(),
+             desc='Toggle through layouts'
+             ),
          Key([mod, "shift"], "q",
              lazy.window.kill(),
              desc='Kill active window'
@@ -36,17 +42,24 @@ keys = [
              lazy.restart(),
              desc='Restart Qtile'
              ),
-         Key([mod, "shift"], "p",
+         Key([mod, "shift"], "i",
              lazy.shutdown(),
              desc='Shutdown Qtile'
              ),
-
-         #Key([mod, "shift"], "Return",
-             #lazy.spawn("emacsclient -c -a emacs"),
-             #desc='Doom Emacs'
-             #),
+        # Key([mod, "shift"], "l",
+         #    lazy.spawn('wlogout'),
+          #   desc='launches wlogout'
+           #  ),
+           #  welp, wlogout can't be executed. Rip.
+         Key([mod, "shift"], "Return",
+             lazy.spawn("emacsclient -c -a emacs"),
+             desc='Doom Emacs'
+             ),
           Key([mod, "shift"], "e", lazy.spawn('firefox'), desc="Launches Firefox Web Browser"),
           Key([mod, "shift"], "f", lazy.spawn('pcmanfm'), desc="Launches Pcmanfm File Manager"),
+         # Key([mod, "shift"], "c", lazy.spawn('google-chrome'), desc="Launches chrome"),(doesnt seem to work)
+
+
          ### Switch focus to specific monitor (out of three)
          Key([mod], "w",
              lazy.to_screen(0),
@@ -79,24 +92,38 @@ keys = [
              desc='Move down a section in treetab'
              ),
          ### Window controls
-         Key([mod], "j",
-             lazy.layout.down(),
-             desc='Move focus down in current stack pane'
-             ),
-         Key([mod], "k",
-             lazy.layout.up(),
-             desc='Move focus up in current stack pane'
-             ),
-         Key([mod, "shift"], "j",
-             lazy.layout.shuffle_down(),
-             lazy.layout.section_down(),
-             desc='Move windows down in current stack'
-             ),
-         Key([mod, "shift"], "k",
+
+         ###  #old default way to do things which i am going to preserve here in case I want to return to the traditional ways of navigating with H,J,K,L
+         #Key([mod], "j",
+          #   lazy.layout.down(),
+           #  desc='Move focus down in current stack pane'
+            # ),
+         #Key([mod], "k",
+          #   lazy.layout.up(),
+           #  desc='Move focus up in current stack pane'
+            # ),
+            #Key([mod, "shift"], "j",
+          #   lazy.layout.shuffle_up(),
+           #  lazy.layout.section_up(),
+            # desc='Move windows up in current stack'
+             #),
+         #Key([mod, "shift"], "k",
+          #   lazy.layout.shuffle_down(),
+           #  lazy.layout.section_down(),
+            # desc='Move windows down in current stack'
+             #),
+
+       Key([mod], "j",
              lazy.layout.shuffle_up(),
              lazy.layout.section_up(),
              desc='Move windows up in current stack'
              ),
+         Key([mod], "k",
+             lazy.layout.shuffle_down(),
+             lazy.layout.section_down(),
+             desc='Move windows down in current stack'
+             ),
+
          Key([mod], "h",
              lazy.layout.shrink(),
              lazy.layout.decrease_nmaster(),
@@ -124,25 +151,22 @@ keys = [
              desc='toggle fullscreen'
              ),
          ### Stack controls
-         Key([mod, "shift"], "Tab",
-             lazy.layout.rotate(),
-             lazy.layout.flip(),
-             desc='Switch which side main pane occupies (XmonadTall)'
-             ),
           Key([mod], "space",
              lazy.layout.next(),
+              #Not entirely sure what the difference is between layout.next and layout.down, they seem to do the same thing.
              desc='Switch window focus to other pane(s) of stack'
              ),
          Key([mod, "shift"], "space",
-             lazy.layout.toggle_split(),
-             desc='Toggle between split and unsplit sides of stack'
+             lazy.layout.up(),
+             desc='reverse of teh above command'
              ),
+
         ### Brightness, Alsa, Screenshots...
 
     #Brightness
 
-  Key([], "XF86MonBrightnessUp", lazy.spawn("brightnessctl set 10%+")),
-  Key([], "XF86MonBrightnessDown", lazy.spawn("brightnessctl set 10%-")),
+  Key([], "XF86MonBrightnessUp", lazy.spawn("brightnessctl set 5%+")),
+  Key([], "XF86MonBrightnessDown", lazy.spawn("brightnessctl set 5%-")),
 
 	#Atalhos
 	  Key([], "Print", lazy.spawn("flameshot gui")),
@@ -155,53 +179,53 @@ keys = [
     Key([], "XF86AudioLowerVolume", lazy.spawn("amixer set Master 5%-")),
     Key([], "XF86AudioMute", lazy.spawn("amixer -D pulse set Master 1+ toggle")),
 
-         # Emacs programs launched using the key chord CTRL+e followed by 'key'
-         KeyChord(["control"],"e", [
-             Key([], "e",
-                 lazy.spawn("emacsclient -c -a 'emacs'"),
-                 desc='Launch Emacs'
-                 ),
-             Key([], "b",
-                 lazy.spawn("emacsclient -c -a 'emacs' --eval '(ibuffer)'"),
-                 desc='Launch ibuffer inside Emacs'
-                 ),
-             Key([], "d",
-                 lazy.spawn("emacsclient -c -a 'emacs' --eval '(dired nil)'"),
-                 desc='Launch dired inside Emacs'
-                 ),
-             Key([], "i",
-                 lazy.spawn("emacsclient -c -a 'emacs' --eval '(erc)'"),
-                 desc='Launch erc inside Emacs'
-                 ),
-             Key([], "m",
-                 lazy.spawn("emacsclient -c -a 'emacs' --eval '(mu4e)'"),
-                 desc='Launch mu4e inside Emacs'
-                 ),
-             Key([], "n",
-                 lazy.spawn("emacsclient -c -a 'emacs' --eval '(elfeed)'"),
-                 desc='Launch elfeed inside Emacs'
-                 ),
-             Key([], "s",
-                 lazy.spawn("emacsclient -c -a 'emacs' --eval '(eshell)'"),
-                 desc='Launch the eshell inside Emacs'
-                 ),
-             Key([], "v",
-                 lazy.spawn("emacsclient -c -a 'emacs' --eval '(+vterm/here nil)'"),
-                 desc='Launch vterm inside Emacs'
-                 )
-         ]),
+          # Emacs programs launched using the key chord CTRL+e followed by 'key'
+  #       KeyChord(["control"],"e", [
+  #           Key([], "e",
+  #               lazy.spawn("emacsclient -c -a 'emacs'"),
+  #               desc='Launch Emacs'
+  #               ),
+  #           Key([], "b",
+  #               lazy.spawn("emacsclient -c -a 'emacs' --eval '(ibuffer)'"),
+  #               desc='Launch ibuffer inside Emacs'
+  #               ),
+  #           Key([], "d",
+  #               lazy.spawn("emacsclient -c -a 'emacs' --eval '(dired nil)'"),
+  #               desc='Launch dired inside Emacs'
+  #               ),
+  #           Key([], "i",
+  #               lazy.spawn("emacsclient -c -a 'emacs' --eval '(erc)'"),
+  #               desc='Launch erc inside Emacs'
+  #               ),
+  #           Key([], "m",
+  #               lazy.spawn("emacsclient -c -a 'emacs' --eval '(mu4e)'"),
+  #               desc='Launch mu4e inside Emacs'
+  #               ),
+  #           Key([], "n",
+  #               lazy.spawn("emacsclient -c -a 'emacs' --eval '(elfeed)'"),
+  #               desc='Launch elfeed inside Emacs'
+  #               ),
+  #           Key([], "s",
+  #               lazy.spawn("emacsclient -c -a 'emacs' --eval '(eshell)'"),
+  #               desc='Launch the eshell inside Emacs'
+  #               ),
+  #           Key([], "v",
+  #               lazy.spawn("emacsclient -c -a 'emacs' --eval '(+vterm/here nil)'"),
+  #               desc='Launch vterm inside Emacs'
+  #               )
+  #       ])
 ]
 
 #Workspaces:
-group_names = [("I", {'layout': 'monadtall'}),
-               ("II", {'layout': 'monadtall'}),
-               ("III", {'layout': 'ratiotile'}),
-               ("IV", {'layout': 'stack'}),
-               ("V", {'layout': 'monadtall'}),
-               ("VI", {'layout': 'max'}),
-               ("VII", {'layout': 'treetab'}),
-               ("VIII", {'layout': 'floating'}),
-               ("IX", {'layout': 'ratioTile'})]
+group_names = [("", {'layout': 'monadtall'}),
+               ("", {'layout': 'monadtall'}),
+               ("", {'layout': 'monadtall'}),
+               ("", {'layout': 'treetab'}),
+               ("", {'layout': 'monadtall'}),
+               ("", {'layout': 'ratiotile'}),
+               ("", {'layout': 'ratiotile'}),
+               ("", {'layout': 'ratiotile'}),
+               ("", {'layout': 'ratiotile'})]
 
 groups = [Group(name, **kwargs) for name, kwargs in group_names]
 
@@ -210,24 +234,24 @@ for i, (name, kwargs) in enumerate(group_names, 1):
     keys.append(Key([mod, "shift"], str(i), lazy.window.togroup(name))) # Send current window to another group
 
 
-colors = [["#282c34", "#282c34"], # panel background
-          ["#3d3f4b", "#434758"], # background for current screen tab
-          ["#ffffff", "#ffffff"], # font color for group names
-          ["#ff5555", "#ff5555"], # border line color for current tab
-          ["#74438f", "#74438f"], # border line color for 'other tabs' and color for 'odd widgets'
+colors = [["#434C5E", "#434C5E"], # panel background
+          ["#3B4252", "#3B4252"], # background for current screen tab
+          ["#81a1c1", "#81a1c1"], # font color for group names
+          ["#434c5e", "#434c5e"], # border line color for current tab
+          ["#5E81AC", "#5E81AC"], # border line color for 'other tabs' and color for 'odd widgets'
           ["#4f76c7", "#4f76c7"], # color for the 'even widgets'
-          ["#e1acff", "#e1acff"], # window name
-          ["#ecbbfb", "#ecbbfb"]] # backbround for inactive screens
+          ["#E1ACFF", "#E1ACFF"], # window name
+          ["#81a1c1", "#81a1c1"]] # backbround for inactive screens
 
 prompt = "{0}@{1}: ".format(os.environ["USER"], socket.gethostname())
 
-#Layouts:
 
+#Layouts:
 
 layout_theme = {"border_width": 2,
                 "margin": 8,
-                "border_focus": "e1acff",
-                "border_normal": "1D2330"
+                "border_focus": "#e1acff",
+                "border_normal": "#81A1C1"
                 }
 
 layouts = [
@@ -241,19 +265,20 @@ layouts = [
     #layout.Matrix(**layout_theme),
     #layout.Zoomy(**layout_theme),
     layout.MonadTall(**layout_theme,
-                      ratio=0.6,
+                      ratio=0.55,
                      ),
     layout.Max(**layout_theme),
     layout.Stack(num_stacks=2),
     layout.RatioTile(**layout_theme),
+    layout.Floating(**layout_theme),
     layout.TreeTab(
          font = "Ubuntu",
-         fontsize = 10,
-         sections = ["FIRST", "SECOND", "THIRD", "FOURTH"],
+         fontsize = 30,
+         sections = ["I", "II", "III"],
          section_fontsize = 10,
          border_width = 2,
-         bg_color = "1c1f24",
-         active_bg = "c678dd",
+         bg_color = "434C5E",
+         active_bg = "#81A1C1",
          active_fg = "000000",
          inactive_bg = "a9a1e1",
          inactive_fg = "1c1f24",
@@ -265,16 +290,16 @@ layouts = [
          level_shift = 8,
          vspace = 3,
          panel_width = 200
-         ),
-    layout.Floating(**layout_theme)
+         )
 ]
 
 ##### DEFAULT WIDGET SETTINGS #####
 widget_defaults = dict(
     font="Source Code Pro Medium",
-    fontsize = 20,
+    fontsize = 16,
     padding = 5,
-    background=colors[2]
+    foreground = colors[2],
+    background=colors[0]
 )
 extension_defaults = widget_defaults.copy()
 
@@ -282,85 +307,83 @@ def init_widgets_list():
     widgets_list = [
             widget.Spacer(
                 length = 2,
-                background = colors[1]
+                background = colors[0]
             ),
 
             # Left Side of the bar
 
              widget.Sep(
                 linewidth = 3,
-                background = colors[1]
+                background = colors[0]
             ),
             widget.TextBox(
                 font = "Iosevka Nerd Font",
-                fontsize = 20,
+                fontsize = 18,
                 text = "﬙",
-                foreground = colors[6],
-                background = colors[1]
+                foreground = colors[2],
+                background = colors[0]
             ),
             widget.CPU(
                 font = "Source Code Pro Medium",
                 format = "{load_percent}%",
-                fontsize = 20,
+                fontsize = 16,
                 foreground = colors[2],
-                background = colors[1],
+                background = colors[0],
                 update_interval = 5
             ),
             widget.TextBox(
                 font = "Iosevka Nerd Font",
-                fontsize = 20,
+                fontsize = 18,
                 text = "",
-                foreground = colors[5],
-                background = colors[1]
+                foreground = colors[2],
+                background = colors[0]
             ),
             widget.Memory(
                 font = "Source Code Pro Medium",
+                fontsize = 16,
                 format = "{MemUsed:.0f}{mm}",
                 foreground = colors[2],
-                background = colors[1],
+                background = colors[0],
                 update_interval = 5
             ),
-           widget.TextBox(
-                font = "Iosevka Nerd Font",
-                fontsize = 20,
-                text = "",
-                foreground = colors[5],
-                background = colors[1]
+          # widget.TextBox(
+           #     font = "Iosevka Nerd Font",
+            #    fontsize = 20,
+             #   text = "",
+              #  foreground = colors[5],
+               # background = colors[1]
+          #  ),
+           # widget.Net(
+            #    format = "{down} ↓↑ {up}",
+             #   foreground = colors[2],
+              #  background = colors[1],
+               # update_interval = 5
+          #  ),
+            widget.Sep(
+                linewidth = 3,
+                background = colors[0]
             ),
-            widget.Net(
-                format = "{down} ↓↑ {up}",
-                foreground = colors[2],
-                background = colors[1],
-                update_interval = 5
-            ),
+            widget.Systray(
+                        background=colors[0],
+                        icon_size=20,
+                        padding = 4
+                        ),
            widget.Spacer(
                 length = bar.STRETCH,
-                background = colors[1]
+                background = colors[0]
             ),
 
             # Center bar
-            widget.TextBox(
-                       text = "",
-                       padding = 2,
-                       foreground = colors[2],
-                       background = colors[4],
-                       fontsize = 24
-                       ),
-            widget.CheckUpdates(
-                       update_interval = 1800,
-                       distro = "Arch_checkupdates",
-                       display_format = "{updates} Updates",
-                       foreground = colors[2],
-                       mouse_callbacks = {'Button1': lazy.spawn(myTerm + 'echo sudo pacman -Syu')},
-                       background = colors[4]
-                       ),
-            widget.Sep(
-                linewidth = 3,
-                background = colors[1]
-            ),
+
+ #          widget.TextBox(
+  #          font="Arial", foreground = colors[2],
+   #         # font="Arial", foreground=COLS["deus_3"],
+    #        text="◢", fontsize=30, padding=-1
+     #   ),
              widget.GroupBox(
                        font = "Source Code Pro",
-                       fontsize = 20,
+                       disable_drag = True,
+                       fontsize = 25,
                        margin_y = 3,
                        margin_x = 5,
                        padding_y = 5,
@@ -371,123 +394,119 @@ def init_widgets_list():
                        rounded = True,
                        highlight_color = colors[1],
                        highlight_method = "line",
-                       this_current_screen_border = colors[6],
-                       this_screen_border = colors [4],
-                       other_current_screen_border = colors[6],
-                       other_screen_border = colors[4],
+                       this_current_screen_border = colors[5],
+                       this_screen_border = colors [2],
+                       other_current_screen_border = colors[5],
+                       other_screen_border = colors[2],
                        foreground = colors[2],
                        background = colors[0]
                        ),
-             widget.Sep(
-                linewidth = 3,
-                background = colors[1]
-            ),
-            widget.TextBox(
-                font = "Iosevka Nerd Font",
-                fontsize = 20,
-                text = " ",
-                foreground = colors[5],
-                background = colors[1]
-            ),
+        # Marker for the end of the groups to give a nice bg: ◢■■■■■■■◤
+        widget.TextBox(
+            font="Arial", foreground = colors[0],
+            # font="Arial", foreground=COLS["deus_3"],
+            text="◤ ", fontsize=20, padding=-5
+        ),
+        widget.TextBox(
+                       text = "",
+                       padding = 2,
+                       foreground = colors[2],
+                       background = colors[0],
+                       fontsize = 17,
+                       font = "Iosevka Nerd Font"
+                       ),
             widget.CurrentLayout(
                 font = "Source Code Pro Medium",
-                fontsize = 20,
+                fontsize = 16,
                 foreground = colors[2],
-                background = colors[1]
+                background = colors[0]
             ),
 
-            # Left Side of the bar
+            # Right Side of the bar
 
             widget.Spacer(
                 length = bar.STRETCH,
-                background = colors[1]
+                background = colors[0]
             ),
-            widget.Systray(
-                        background=colors[1],
-                        icon_size=20,
-                        padding = 4
-                        ),
-            widget.Battery(
-                      font="Noto Sans",
-                         update_interval = 60,
-                         fontsize = 20,
-                         foreground = colors[5],
-                        background = colors[1],
-	                     ),
-                widget.TextBox(
-                         font="FontAwesome",
-                         text="  ",
-                       foreground=colors[6],
-                        background=colors[1],
-                         padding = 0,
-                         fontsize=20
-                         ),
-            widget.Sep(
-                linewidth = 3,
-                background = colors[1]
-            ),
+  #          widget.Sep(
+   #             linewidth = 3,
+    #            background = colors[0]
+     #       ),
             widget.TextBox(
-                      text = "",
-                       foreground = colors[2],
-                       background = colors[5],
-                       padding = 0
+                font="FontAwesome",
+                 text="",
+               foreground=colors[2],
+                background=colors[0],
+                padding = 0,
+                fontsize=18
+            ),
+            widget.Battery(
+                font="Noto Sans",
+                format = "{percent:2.0%}{hour:d}:{min:02d}",
+                         update_interval = 60,
+                         fontsize = 16,
+                         foreground = colors[2],
+                        background = colors[0],
+	                     ),
+            widget.TextBox(
+               text = "",
+               foreground = colors[2],
+                background = colors[0],
+                padding = 0,
+                fontsize=40
                        ),
               widget.Volume(
                        foreground = colors[2],
-                       background = colors[5],
-                       padding = 5
+                       background = colors[0],
+                       padding = 5,
+                       fontsize = 16
                        ),
-            widget.Sep(
-                size_percent = 60,
-                linewidth = 3,
-                background = colors[1]
-            ),
-            #widget.TextBox(
-                #text = "",
-                #foreground = colors[2],
-                       #background = colors[5],
-                       #padding = 0
-                       #),
-            #widget.Backlight(
-                #brightness_file = "intel_backlight",
-                #foreground = colors[2],
-                       #background = colors[5],
-                       #padding = 5
-                       #),
             widget.TextBox(
                 font = "Iosevka Nerd Font",
-                fontsize = 20,
+                fontsize = 18,
                 text = "",
-                foreground = colors[7],
-                background = colors[1]
+                foreground = colors[2],
+                background = colors[0]
             ),
             widget.Clock(
                 font = "Source Code Pro Medium",
                 format = '%b %d-%Y',
-                fontsize = 20,
+                fontsize = 16,
                 foreground = colors[2],
-                background = colors[1]
+                background = colors[0]
             ),
             widget.TextBox(
                 font = "Iosevka Nerd Font",
-                fontsize = 20,
+                fontsize = 18,
                 text = "",
-                foreground = colors[7],
-                background = colors[1]
+                foreground = colors[2],
+                background = colors[0]
             ),
             widget.Clock(
                 font = "Source Code Pro Medium",
                 format = '%I:%M:%S %p',
-                fontsize = 20,
+                fontsize = 16,
                 foreground = colors[2],
-                background = colors[1]
+                background = colors[0]
             ),
+             widget.Sep(
+                linewidth = 3,
+                background = colors[0]
+            ),
+
             widget.Spacer(
                 length = 5,
-                background = colors[1]
+                background = colors[0]
             )
         ]
     return widgets_list
+
+#Decorations for bar:
+#        widget.TextBox(fontsize=25,
+#                       padding=0,text=' ',
+#                       foreground = colors[2],
+       #                background = colors[0]
+        #               ),
 
 
 # screens/bar
@@ -502,9 +521,9 @@ def init_widgets_screen2():
     return widgets_screen2                 # Monitor 2 will display all widgets in widgets_list
 
 def init_screens():
-    return [Screen(top=bar.Bar(widgets=init_widgets_screen1(), size=45,  opacity=0.9, margin=[5,10,0,10])),
-            Screen(top=bar.Bar(widgets=init_widgets_screen2(), opacity=0.9, size=30, margin=[5,10,0,10])),
-            Screen(top=bar.Bar(widgets=init_widgets_screen1(), opacity=0.9, size=30, margin=[5,10,0,10]))]
+    return [Screen(top=bar.Bar(widgets=init_widgets_screen1(), size=35,  opacity=0.9, margin=[5,10,0,10])),
+            Screen(top=bar.Bar(widgets=init_widgets_screen2(), opacity=0.9, size=35, margin=[5,10,0,10])),
+            Screen(top=bar.Bar(widgets=init_widgets_screen1(), opacity=0.9, size=35, margin=[5,10,0,10]))]
 
 if __name__ in ["config", "__main__"]:
     screens = init_screens()
@@ -549,12 +568,12 @@ def assign_app_group(client):
     d[group_names[0][0]] = ['firefox']
     d[group_names[1][0]] = []
     d[group_names[2][0]] = []
-    d[group_names[3][0]] = []
-    d[group_names[4][0]] = ['emacs']
+    d[group_names[3][0]] = ['emacs']
+    d[group_names[4][0]] = []
     d[group_names[5][0]] = ['pcmanfm']
     d[group_names[6][0]] = ['discord']
-    d[group_names[7][0]] = ['vlc', 'obs', 'mpv', 'mplayer', 'lxmusic', 'gimp']
-    d[group_names[8][0]] = ['gparted', 'wdisplays', 'pavucontrol']
+    d[group_names[7][0]] = ['vlc', 'obs', 'mpv', 'mplayer', 'lxmusic', 'gimp', 'lutris']
+    d[group_names[8][0]] = ['gparted', 'wdisplays', 'pavucontrol', 'arandr']
 
     wm_class = client.window.get_wm_class()[0]
     for i in range(len(d)):

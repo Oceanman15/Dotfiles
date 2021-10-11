@@ -346,6 +346,36 @@ def init_widgets_list():
                 background = colors[0],
                 update_interval = 5
             ),
+            widget.TextBox(
+                font = "Iosevka Nerd Font",
+                fontsize = 18,
+                text = "GPU",
+                foreground = colors[2],
+                background = colors[0]
+            ),
+            widget.NvidiaSensors(
+                   font = "Source Code Pro Medium",
+                fontsize = 16,
+                foreground = colors[2],
+                background = colors[0],
+                update_interval = 5
+            ),
+        #implement the bluetooth widget:
+ #            widget.TextBox(
+  #              font = "Iosevka Nerd Font",
+   #             fontsize = 18,
+    #            text = "Bluetooth",
+     #           foreground = colors[2],
+      #          background = colors[0]
+       #     ),
+#            widget.Bluetooth(
+ #                   font = "Source Code Pro Medium",
+  #              fontsize = 16,
+   #             foreground = colors[2],
+    #            background = colors[0],
+     #           update_interval = 5
+      #      ),
+
           # widget.TextBox(
            #     font = "Iosevka Nerd Font",
             #    fontsize = 20,
@@ -375,11 +405,14 @@ def init_widgets_list():
 
             # Center bar
 
+        #Implement LaunchBar widget here for scripts like logout, launch google-chrome(if possible) etc.
+
  #          widget.TextBox(
   #          font="Arial", foreground = colors[2],
    #         # font="Arial", foreground=COLS["deus_3"],
     #        text="◢", fontsize=30, padding=-1
      #   ),
+
              widget.GroupBox(
                        font = "Source Code Pro",
                        disable_drag = True,
@@ -407,6 +440,34 @@ def init_widgets_list():
             # font="Arial", foreground=COLS["deus_3"],
             text="◤ ", fontsize=20, padding=-5
         ),
+
+ ### Right Side of the bar----------------------------------------
+
+        widget.Spacer(
+                length = bar.STRETCH,
+                background = colors[0]
+            ),
+  #          widget.Sep(
+   #             linewidth = 3,
+    #            background = colors[0]
+     #       ),
+     #
+     #qtile has some problems with brightness:
+ #           widget.TextBox(
+  #              font="FontAwesome",
+   #              text="need to find icon",
+    #           foreground=colors[2],
+     #           background=colors[0],
+      #          padding = 0,
+       #         fontsize=18
+        #    ),
+         #   widget.Backlight(
+          #              foreground = colors[2],
+           #            background = colors[0],
+            #           padding = 5,
+             #          fontsize = 16
+           # ),
+
         widget.TextBox(
                        text = "",
                        padding = 2,
@@ -421,17 +482,12 @@ def init_widgets_list():
                 foreground = colors[2],
                 background = colors[0]
             ),
-
-            # Right Side of the bar
-
-            widget.Spacer(
-                length = bar.STRETCH,
-                background = colors[0]
-            ),
-  #          widget.Sep(
-   #             linewidth = 3,
-    #            background = colors[0]
-     #       ),
+        widget.TextBox(
+            font="Arial", foreground = colors[0],
+            # font="Arial", foreground=COLS["deus_3"],
+            text="◤ ", fontsize=20, padding=-5
+        ),
+           # there is a BatteryIcon widget that changes the battery icon as the battery gets depleted, implement it later.
             widget.TextBox(
                 font="FontAwesome",
                  text="",
@@ -470,7 +526,7 @@ def init_widgets_list():
             ),
             widget.Clock(
                 font = "Source Code Pro Medium",
-                format = '%b %d-%Y',
+                format = '%a %d %b-%Y',
                 fontsize = 16,
                 foreground = colors[2],
                 background = colors[0]
@@ -570,7 +626,7 @@ def assign_app_group(client):
     d[group_names[2][0]] = []
     d[group_names[3][0]] = ['emacs']
     d[group_names[4][0]] = []
-    d[group_names[5][0]] = ['pcmanfm']
+    d[group_names[5][0]] = []
     d[group_names[6][0]] = ['discord']
     d[group_names[7][0]] = ['vlc', 'obs', 'mpv', 'mplayer', 'lxmusic', 'gimp', 'lutris']
     d[group_names[8][0]] = ['gparted', 'wdisplays', 'pavucontrol', 'arandr']

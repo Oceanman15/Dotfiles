@@ -233,7 +233,7 @@ prompt = "{0}@{1}: ".format(os.environ["USER"], socket.gethostname())
 
 layout_theme = {"border_width": 2,
                 "margin": 8,
-                "border_focus": "#e1acff",
+                "border_focus": "#e5e9f0",
                 "border_normal": "#81A1C1"
                 }
 
@@ -413,6 +413,8 @@ def init_widgets_list():
                        highlight_method = "line",
                        this_current_screen_border = colors[2],
                        this_screen_border = colors [2],
+                       other_current_screen_border = colors[2],
+                       other_screen_border = colors[3],                      
                        foreground = colors[2],
                        background = colors[0]
                        ),

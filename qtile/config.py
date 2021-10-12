@@ -46,11 +46,6 @@ keys = [
              lazy.shutdown(),
              desc='Shutdown Qtile'
              ),
-        # Key([mod, "shift"], "l",
-         #    lazy.spawn('wlogout'),
-          #   desc='launches wlogout'
-           #  ),
-           #  welp, wlogout can't be executed. Rip.
          Key([mod, "shift"], "Return",
              lazy.spawn("emacsclient -c -a emacs"),
              desc='Doom Emacs'
@@ -92,26 +87,6 @@ keys = [
              desc='Move down a section in treetab'
              ),
          ### Window controls
-
-         ###  #old default way to do things which i am going to preserve here in case I want to return to the traditional ways of navigating with H,J,K,L
-         #Key([mod], "j",
-          #   lazy.layout.down(),
-           #  desc='Move focus down in current stack pane'
-            # ),
-         #Key([mod], "k",
-          #   lazy.layout.up(),
-           #  desc='Move focus up in current stack pane'
-            # ),
-            #Key([mod, "shift"], "j",
-          #   lazy.layout.shuffle_up(),
-           #  lazy.layout.section_up(),
-            # desc='Move windows up in current stack'
-             #),
-         #Key([mod, "shift"], "k",
-          #   lazy.layout.shuffle_down(),
-           #  lazy.layout.section_down(),
-            # desc='Move windows down in current stack'
-             #),
 
        Key([mod], "j",
              lazy.layout.shuffle_up(),
@@ -394,35 +369,7 @@ def init_widgets_list():
                 background = colors[0],
                 update_interval = 5
             ),
-        #implement the bluetooth widget:
- #            widget.TextBox(
-  #              font = "Iosevka Nerd Font",
-   #             fontsize = 18,
-    #            text = "Bluetooth",
-     #           foreground = colors[2],
-      #          background = colors[0]
-       #     ),
-#            widget.Bluetooth(
- #                   font = "Source Code Pro Medium",
-  #              fontsize = 16,
-   #             foreground = colors[2],
-    #            background = colors[0],
-     #           update_interval = 5
-      #      ),
-
-          # widget.TextBox(
-           #     font = "Iosevka Nerd Font",
-            #    fontsize = 20,
-             #   text = "",
-              #  foreground = colors[5],
-               # background = colors[1]
-          #  ),
-           # widget.Net(
-            #    format = "{down} ↓↑ {up}",
-             #   foreground = colors[2],
-              #  background = colors[1],
-               # update_interval = 5
-          #  ),
+        #implement the bluetooth widget if its not super hacky:
             widget.Systray(
                         background=colors[0],
                         icon_size=20,
@@ -440,9 +387,8 @@ def init_widgets_list():
                 background = colors[1]
             ),
 
-            # Center bar
+            #### Center bar ---------------------------------------
 
-        #Implement LaunchBar widget here for scripts like logout, launch google-chrome(if possible) etc.
 
         				widget.TextBox(
 					text="",
@@ -451,7 +397,6 @@ def init_widgets_list():
 					fontsize=33,
 					padding=0,
 				),
-        #Lots of good settings here:
              widget.GroupBox(
                        font = "Source Code Pro",
                        disable_drag = True,
@@ -485,27 +430,8 @@ def init_widgets_list():
                 length = bar.STRETCH,
                 background = colors[1]
             ),
-  #          widget.Sep(
-   #             linewidth = 3,
-    #            background = colors[0]
-     #       ),
-     #
-     #qtile has some problems with brightness:
- #           widget.TextBox(
-  #              font="FontAwesome",
-   #              text="need to find icon",
-    #           foreground=colors[2],
-     #           background=colors[0],
-      #          padding = 0,
-       #         fontsize=18
-        #    ),
-         #   widget.Backlight(
-          #              foreground = colors[2],
-           #            background = colors[0],
-            #           padding = 5,
-             #          fontsize = 16
-           # ),
 
+     #qtile has some problems with displaying screen brightness, need to fix
         				widget.TextBox(
 					text="",
 					foreground=colors[0],
@@ -527,11 +453,7 @@ def init_widgets_list():
                 foreground = colors[2],
                 background = colors[0]
             ),
-        widget.TextBox(
-            font="Arial", foreground = colors[0],
-            # font="Arial", foreground=COLS["deus_3"],
-            text="◤ ", fontsize=20, padding=-5
-        ),
+
            # there is a BatteryIcon widget that changes the battery icon as the battery gets depleted, implement it later.
             widget.TextBox(
                 font="FontAwesome",

@@ -310,7 +310,7 @@ def init_widgets_list():
                 background = colors[0]
             ),
              widget.TextBox(
-					text="",
+					text="",
 					foreground=colors[13],
 					background=colors[1],
 					font="Font Awesome 5 Free Solid",
@@ -401,10 +401,10 @@ def init_widgets_list():
                        font = "Source Code Pro",
                        disable_drag = True,
                        fontsize = 25,
-                       margin_y = 3,
-                       margin_x = 5,
-                       padding_y = 5,
-                       padding_x = 5,
+                       margin_y = 0,
+                       margin_x = 2,
+                       padding_y = 0,
+                       padding_x = 2,
                        borderwidth = 5,
                        active = colors[2],
                        inactive = colors[2],
@@ -442,7 +442,7 @@ def init_widgets_list():
 					padding=0,
 				),
         widget.TextBox(
-                       text = "",
+                       text = "",
                        padding = 2,
                        foreground = colors[2],
                        background = colors[0],

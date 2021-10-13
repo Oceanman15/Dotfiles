@@ -400,7 +400,7 @@ def init_widgets_list():
              widget.GroupBox(
                        font = "Source Code Pro",
                        disable_drag = True,
-                       fontsize = 25,
+                       fontsize = 30,
                        margin_y = 0,
                        margin_x = 2,
                        padding_y = 0,

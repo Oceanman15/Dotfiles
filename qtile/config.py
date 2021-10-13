@@ -144,8 +144,7 @@ keys = [
   Key([], "XF86MonBrightnessDown", lazy.spawn("brightnessctl set 5%-")),
 
 	#Atalhos
-	  Key([], "Print", lazy.spawn("flameshot gui")),
-
+	  Key([], "Print", lazy.spawn("scrot -s ./screenshot/%Y-%m-%d-%T-screenshot.png")),
 	#Media Keys
     Key([], "XF86AudioNext", lazy.spawn("playerctl next")),
     Key([], "XF86AudioPrev", lazy.spawn("playerctl previous")),
@@ -414,7 +413,7 @@ def init_widgets_list():
                        this_current_screen_border = colors[2],
                        this_screen_border = colors [2],
                        other_current_screen_border = colors[2],
-                       other_screen_border = colors[3],                      
+                       other_screen_border = colors[3],
                        foreground = colors[2],
                        background = colors[0]
                        ),

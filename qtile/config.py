@@ -495,7 +495,7 @@ def init_widgets_list():
             ),
             widget.Clock(
                 font = "Source Code Pro Medium",
-                format = '%a %d %b-%Y',
+                format = '%a %d %b(%m)',
                 fontsize = 16,
                 foreground = colors[2],
                 background = colors[0]

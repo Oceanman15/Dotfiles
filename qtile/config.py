@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# Note to self: the bluetooth widget is basically useless:
 import os
 import re
 import socket
@@ -23,7 +24,7 @@ keys = [
              ),
          Key([mod], "d",
             #lazy.spawn("wofi --show drun -config ~/.config/wofi/config -style ~/.config/wofi/style.css"),
-             lazy.spawn("rofi -show drun -config ~/.config/rofi/launchers/text/style_4.rasi"),
+             lazy.spawn("rofi -show drun -config ~/.config/rofi/launchers/text/style_3.rasi"),
             desc='Run Launcher'
              ),
          Key([mod], "Tab",
@@ -51,7 +52,7 @@ keys = [
              desc='Doom Emacs'
              ),
           Key([mod, "shift"], "e", lazy.spawn('firefox'), desc="Launches Firefox Web Browser"),
-          Key([mod, "shift"], "f", lazy.spawn('pcmanfm'), desc="Launches Pcmanfm File Manager"),
+          Key([mod, "shift"], "f", lazy.spawn('thunar'), desc="Launches thunar File Manager"),
          # Key([mod, "shift"], "c", lazy.spawn('google-chrome'), desc="Launches chrome"),(doesnt seem to work)
 
 
@@ -145,6 +146,7 @@ keys = [
 
 	#Atalhos
 	  Key([], "Print", lazy.spawn("scrot -s ./screenshot/%Y-%m-%d-%T-screenshot.png")),
+      Key([mod], "Print", lazy.spawn("scrot ./screenshot/%Y-%m-%d-%T-screenshot.png")),
 	#Media Keys
     Key([], "XF86AudioNext", lazy.spawn("playerctl next")),
     Key([], "XF86AudioPrev", lazy.spawn("playerctl previous")),
@@ -191,15 +193,15 @@ keys = [
 ]
 
 #Workspaces:
-group_names = [("", {'layout': 'monadtall'}),
-               ("", {'layout': 'monadtall'}),
+group_names = [("", {'layout': 'monadwide'}),
+               ("", {'layout': 'monadtall'}),#
                ("", {'layout': 'monadtall'}),
-               ("", {'layout': 'treetab'}),
+               ("", {'layout': 'monadtall'}),
                ("", {'layout': 'monadtall'}),
-               ("", {'layout': 'ratiotile'}),
-               ("", {'layout': 'ratiotile'}),
+               ("", {'layout': 'monadtall'}),
+               ("", {'layout': 'monadtall'}),
                ("", {'layout': 'ratiotile'}),
-               ("", {'layout': 'ratiotile'})]
+               ("", {'layout': 'ratiotile'})]
 
 groups = [Group(name, **kwargs) for name, kwargs in group_names]
 
@@ -249,30 +251,30 @@ layouts = [
     layout.MonadTall(**layout_theme,
                       ratio=0.55,
                      ),
-    layout.Max(**layout_theme),
-    layout.Stack(num_stacks=2),
+layout.MonadWide(**layout_theme),
+ layout.Zoomy(**layout_theme),
     layout.RatioTile(**layout_theme),
     layout.Floating(**layout_theme),
-    layout.TreeTab(
-         font = "Ubuntu",
-         fontsize = 30,
-         sections = ["I", "II", "III"],
-         section_fontsize = 10,
-         border_width = 2,
-         bg_color = "434C5E",
-         active_bg = "#81A1C1",
-         active_fg = "000000",
-         inactive_bg = "a9a1e1",
-         inactive_fg = "1c1f24",
-         padding_left = 0,
-         padding_x = 0,
-         padding_y = 5,
-         section_top = 10,
-         section_bottom = 20,
-         level_shift = 8,
-         vspace = 3,
-         panel_width = 200
-         )
+  #  layout.TreeTab(
+  #       font = "Ubuntu",
+   #      fontsize = 30,
+    #     sections = ["I", "II", "III"],
+     #    section_fontsize = 10,
+      #   border_width = 2,
+       #  bg_color = "434C5E",
+        # active_bg = "#81A1C1",
+#         active_fg = "000000",
+ #        inactive_bg = "a9a1e1",
+  #       inactive_fg = "1c1f24",
+   #      padding_left = 0,
+    #     padding_x = 0,
+     #    padding_y = 5,
+      #   section_top = 10,
+       #  section_bottom = 20,
+        # level_shift = 8,
+#         vspace = 3,
+ #        panel_width = 200
+  #       )
 ]
 
 ##### DEFAULT WIDGET SETTINGS #####
@@ -288,9 +290,7 @@ extension_defaults = widget_defaults.copy()
 
 ### Mouse_callback functions
 def open_launcher():
-	qtile.cmd_spawn("./.config/rofi/launchers/colorful/launcher.sh")
-def update():
-	qtile.cmd_spawn(terminal + "-e yay")
+	qtile.cmd_spawn("./.config/rofi/launchers/ribbon/launcher.sh")
 def open_powermenu():
 	qtile.cmd_spawn("./.config/rofi/powermenu/powermenu.sh")
 
@@ -309,7 +309,7 @@ def init_widgets_list():
                 background = colors[0]
             ),
              widget.TextBox(
-					text="",
+					text="  ", #(cool icon) and 
 					foreground=colors[13],
 					background=colors[1],
 					font="Font Awesome 5 Free Solid",
@@ -356,8 +356,8 @@ def init_widgets_list():
             ),
             widget.TextBox(
                 font = "Iosevka Nerd Font",
-                fontsize = 18,
-                text = "GPU",
+                fontsize = 17,
+                text = "",
                 foreground = colors[2],
                 background = colors[0]
             ),
@@ -365,10 +365,10 @@ def init_widgets_list():
                    font = "Source Code Pro Medium",
                 fontsize = 16,
                 foreground = colors[2],
+                foreground_alert = colors[2],
                 background = colors[0],
                 update_interval = 5
             ),
-        #implement the bluetooth widget if its not super hacky:
             widget.Systray(
                         background=colors[0],
                         icon_size=20,
@@ -381,10 +381,43 @@ def init_widgets_list():
 					fontsize=33,
 					padding=0,
 				),
+          widget.Spacer(
+                length = 5,
+                background = colors[1]
+            ),
+       widget.TextBox(
+					text="",
+					foreground=colors[0],
+					background=colors[1],
+					fontsize=33,
+					padding=0,
+				),
+            widget.TextBox(
+                font = "Iosevka Nerd Font",
+                fontsize = 17,
+                text ="",
+                foreground = colors[2],
+                background = colors[0]
+            ),
+        widget.Net(
+                format = "{down} ↓↑ {up}",
+                foreground = colors[2],
+                background = colors[0],
+                update_interval = 5
+            ),
+        widget.TextBox(
+					text="",
+					foreground=colors[0],
+					background=colors[1],
+					fontsize=33,
+					padding=0,
+				),
            widget.Spacer(
                 length = bar.STRETCH,
                 background = colors[1]
             ),
+
+
 
             #### Center bar ---------------------------------------
 
@@ -441,12 +474,12 @@ def init_widgets_list():
 					padding=0,
 				),
         widget.TextBox(
-                       text = "",
+                       text = " ", #Arch icon: 
                        padding = 2,
                        foreground = colors[2],
                        background = colors[0],
                        fontsize = 17,
-                       font = "Iosevka Nerd Font"
+                       font = "Iosevka Nerd Font",
                        ),
             widget.CurrentLayout(
                 font = "Source Code Pro Medium",
@@ -466,7 +499,7 @@ def init_widgets_list():
             ),
             widget.Battery(
                 font="Noto Sans",
-                format = "{percent:2.0%}{hour:d}:{min:02d}",
+                format = "{percent:2.0%}",
                          update_interval = 60,
                          fontsize = 16,
                          foreground = colors[2],
@@ -483,12 +516,21 @@ def init_widgets_list():
                        foreground = colors[2],
                        background = colors[0],
                        padding = 5,
-                       fontsize = 16
+                       fontsize = 16,
+                       update_interval = 0.1,
+                       step = 5
                        ),
+  #          widget.TextBox(
+   #             font = "Iosevka Nerd Font",
+    #            fontsize = 18,
+     #           text = "",
+      #          foreground = colors[2],
+       #         background = colors[0]
+        #    ),
             widget.TextBox(
                 font = "Iosevka Nerd Font",
                 fontsize = 18,
-                text = "",
+                text = "",
                 foreground = colors[2],
                 background = colors[0]
             ),
@@ -496,13 +538,6 @@ def init_widgets_list():
                 font = "Source Code Pro Medium",
                 format = '%a %d %b(%m)',
                 fontsize = 16,
-                foreground = colors[2],
-                background = colors[0]
-            ),
-            widget.TextBox(
-                font = "Iosevka Nerd Font",
-                fontsize = 18,
-                text = "",
                 foreground = colors[2],
                 background = colors[0]
             ),
@@ -603,7 +638,7 @@ def assign_app_group(client):
     d[group_names[0][0]] = ['firefox']
     d[group_names[1][0]] = []
     d[group_names[2][0]] = []
-    d[group_names[3][0]] = ['emacs']
+    d[group_names[3][0]] = []
     d[group_names[4][0]] = []
     d[group_names[5][0]] = []
     d[group_names[6][0]] = ['discord']
@@ -628,7 +663,7 @@ mouse = [
 dgroups_key_binder = None
 dgroups_app_rules = []  # type: List
 main = None
-follow_mouse_focus = True
+follow_mouse_focus = False
 bring_front_click = False
 cursor_warp = False
 

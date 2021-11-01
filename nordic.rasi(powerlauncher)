@@ -1,0 +1,12 @@
+/* colors */
+#Please remove the powerlauncher from file name for this to work)
+
+* {
+    background:                     #3b4252;
+    background-alt:                 #3b4252;
+    foreground:                     #81a1c1;
+    border:               			#81a1c1;
+    border-alt:               		#DA717Fff;
+    selected:               		#4c566a;
+    urgent:                         #DA4453;
+}

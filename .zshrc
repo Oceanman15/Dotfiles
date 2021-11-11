@@ -81,11 +81,10 @@ plugins=(
     git
     emacs
     history-substring-search
-    zsh-autosuggestions
     web-search
+    zsh-autocomplete
 )
 
-source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
@@ -113,10 +112,9 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+
+
+source ~/powerlevel10k/powerlevel10k.zsh-theme
+
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
-
-#starship:
-
-eval "$(starship init zsh)"

@@ -24,7 +24,8 @@ keys = [
              ),
          Key([mod], "d",
             #lazy.spawn("wofi --show drun -config ~/.config/wofi/config -style ~/.config/wofi/style.css"),
-             lazy.spawn("rofi -show drun -config ~/.config/rofi/launchers/text/style_3.rasi"),
+            #lazy.spawn("rofi -show drun -config ~/.config/rofi/launchers/text/style_3.rasi"),
+             lazy.spawn("dmenu_run -fn 'Source Code Pro -14'"),
             desc='Run Launcher'
              ),
          Key([mod], "Tab",
@@ -196,12 +197,12 @@ keys = [
 group_names = [("", {'layout': 'monadwide'}),
                ("", {'layout': 'monadtall'}),#
                ("", {'layout': 'monadtall'}),
-               ("", {'layout': 'monadtall'}),
-               ("", {'layout': 'monadtall'}),
+               ("", {'layout': 'monadtall'}),
+               ("", {'layout': 'monadtall'}),
                ("", {'layout': 'monadtall'}),
                ("", {'layout': 'monadtall'}),
-               ("", {'layout': 'ratiotile'}),
-               ("", {'layout': 'ratiotile'})]
+               ("", {'layout': 'ratiotile'}),
+               ("", {'layout': 'ratiotile'})]
 
 groups = [Group(name, **kwargs) for name, kwargs in group_names]
 
@@ -218,7 +219,7 @@ colors = [
 	["#a3be8c", "#a3be8c"],  # 4 green
 	["#ebcb8b", "#ebcb8b"],  # 5 yellow
 	["#81a1c1", "#81a1c1"],  # 6 blue
-	["#e5e9f0", "#e5e9f0"],  # 7 white
+	["#d8dee9", "#d8dee9"],  # 7 white
 	["#88c0d0", "#88c0d0"],  # 8 cyan
 	["#b48ead", "#b48ead"],  # 9 magenta
 	["#4c566a", "#4c566a"],  # 10 grey
@@ -311,23 +312,17 @@ def init_widgets_list():
              widget.TextBox(
 					text="  ", #(cool icon) and 
 					foreground=colors[13],
-					background=colors[1],
+					background=colors[0],
 					font="Font Awesome 5 Free Solid",
 					fontsize=24,
 					padding=5,
 					mouse_callbacks={"Button1": open_launcher},
 				),
-        				widget.TextBox(
-					text="",
-					foreground=colors[0],
-					background=colors[1],
-					fontsize=33,
-					padding=0,
-				),
+			
             widget.TextBox(
                 font = "Iosevka Nerd Font",
                 fontsize = 18,
-                text = "﬙",
+                text = "",
                 foreground = colors[2],
                 background = colors[0]
             ),
@@ -343,73 +338,59 @@ def init_widgets_list():
                 font = "Iosevka Nerd Font",
                 fontsize = 18,
                 text = "",
-                foreground = colors[2],
+                foreground = colors[11],
                 background = colors[0]
             ),
             widget.Memory(
                 font = "Source Code Pro Medium",
                 fontsize = 16,
                 format = "{MemUsed:.0f}{mm}",
-                foreground = colors[2],
+                foreground = colors[11],
                 background = colors[0],
                 update_interval = 5
             ),
-            widget.TextBox(
-                font = "Iosevka Nerd Font",
-                fontsize = 17,
-                text = "",
-                foreground = colors[2],
-                background = colors[0]
-            ),
-            widget.NvidiaSensors(
-                   font = "Source Code Pro Medium",
-                fontsize = 16,
-                foreground = colors[2],
-                foreground_alert = colors[2],
-                background = colors[0],
-                update_interval = 5
-            ),
-            widget.Systray(
-                        background=colors[0],
-                        icon_size=20,
-                        padding = 4
-                        ),
-        				widget.TextBox(
-					text="",
-					foreground=colors[0],
-					background=colors[1],
-					fontsize=33,
-					padding=0,
-				),
-          widget.Spacer(
-                length = 5,
-                background = colors[1]
-            ),
-       widget.TextBox(
-					text="",
-					foreground=colors[0],
-					background=colors[1],
-					fontsize=33,
-					padding=0,
-				),
+#            widget.TextBox(
+ #               font = "Iosevka Nerd Font",
+  #              fontsize = 17,
+   #             text = "",
+    #            foreground = colors[2],
+     #           background = colors[0]
+      #      ),
+ #           widget.NvidiaSensors(
+  #                 font = "Source Code Pro Medium",
+   #             fontsize = 16,
+    #            foreground = colors[2],
+     #           foreground_alert = colors[2],
+      #          background = colors[0],
+       #         update_interval = 5
+        #    ),
+        #  widget.Spacer(
+       #         length = 5,
+      #          background = colors[1]
+     #       ),
             widget.TextBox(
                 font = "Iosevka Nerd Font",
                 fontsize = 17,
                 text ="",
-                foreground = colors[2],
+                foreground = colors[12],
                 background = colors[0]
             ),
         widget.Net(
                 format = "{down} ↓↑ {up}",
-                foreground = colors[2],
+                foreground = colors[12],
                 background = colors[0],
                 update_interval = 5
             ),
+                        widget.Systray(
+                        background=colors[0],
+                        icon_size=20,
+                        padding = 4
+                        ),
         widget.TextBox(
-					text="",
+					text="",
 					foreground=colors[0],
 					background=colors[1],
-					fontsize=33,
+					fontsize=64,
 					padding=0,
 				),
            widget.Spacer(
@@ -423,21 +404,21 @@ def init_widgets_list():
 
 
         				widget.TextBox(
-					text="",
+					text="",
 					foreground=colors[0],
 					background=colors[1],
-					fontsize=33,
+					fontsize=64,
 					padding=0,
 				),
              widget.GroupBox(
                        font = "Source Code Pro",
                        disable_drag = True,
-                       fontsize = 30,
+                       fontsize = 20,
                        margin_y = 5,
-                       margin_x = 0,
-                       padding_y = 0,
+                       margin_x = 3,
+                       padding_y = 2,
                        padding_x = 0,
-                       borderwidth = 5,
+                       borderwidth = 4,
                        active = colors[2],
                        inactive = colors[2],
                        rounded = True,
@@ -451,10 +432,10 @@ def init_widgets_list():
                        background = colors[0]
                        ),
          				widget.TextBox(
-					text="",
+					text="",
 					foreground=colors[0],
 					background=colors[1],
-					fontsize=33,
+					fontsize=64,
 					padding=0,
 				),
 
@@ -467,16 +448,16 @@ def init_widgets_list():
 
      #qtile has some problems with displaying screen brightness, need to fix
         				widget.TextBox(
-					text="",
+					text="",
 					foreground=colors[0],
 					background=colors[1],
-					fontsize=33,
+					fontsize=64,
 					padding=0,
 				),
         widget.TextBox(
-                       text = " ", #Arch icon: 
+                       text = "", #Arch icon: 
                        padding = 2,
-                       foreground = colors[2],
+                       foreground = colors[7],
                        background = colors[0],
                        fontsize = 17,
                        font = "Iosevka Nerd Font",
@@ -484,15 +465,15 @@ def init_widgets_list():
             widget.CurrentLayout(
                 font = "Source Code Pro Medium",
                 fontsize = 16,
-                foreground = colors[2],
+                foreground = colors[7],
                 background = colors[0]
             ),
 
            # there is a BatteryIcon widget that changes the battery icon as the battery gets depleted, implement it later.
             widget.TextBox(
                 font="FontAwesome",
-                 text="",
-               foreground=colors[2],
+                 text=" ",
+               foreground=colors[9],
                 background=colors[0],
                 padding = 0,
                 fontsize=18
@@ -502,18 +483,18 @@ def init_widgets_list():
                 format = "{percent:2.0%}",
                          update_interval = 60,
                          fontsize = 16,
-                         foreground = colors[2],
+                         foreground = colors[9],
                         background = colors[0],
 	                     ),
             widget.TextBox(
-               text = "",
-               foreground = colors[2],
+               text = " Vol",
+               foreground = colors[8],
                 background = colors[0],
                 padding = 0,
-                fontsize=40
+                fontsize=16
                        ),
               widget.Volume(
-                       foreground = colors[2],
+                       foreground = colors[8],
                        background = colors[0],
                        padding = 5,
                        fontsize = 16,
@@ -530,38 +511,31 @@ def init_widgets_list():
             widget.TextBox(
                 font = "Iosevka Nerd Font",
                 fontsize = 18,
-                text = "",
-                foreground = colors[2],
+                text = "",
+                foreground = colors[4],
                 background = colors[0]
             ),
             widget.Clock(
                 font = "Source Code Pro Medium",
-                format = '%a %d %b(%m)',
+                format = ' %a %d %b(%m)',
                 fontsize = 16,
-                foreground = colors[2],
+                foreground = colors[4],
                 background = colors[0]
             ),
             widget.Clock(
                 font = "Source Code Pro Medium",
-                format = '%I:%M:%S %p',
+                format = '%I:%M:%S %p ',
                 fontsize = 16,
-                foreground = colors[2],
+                foreground = colors[4],
                 background = colors[0]
             ),
-        	widget.TextBox(
-					text="",
-					foreground=colors[0],
-					background=colors[1],
-					fontsize=33,
-					padding=0,
-				),
 				widget.TextBox(
 					text="⏻",
-					foreground=colors[2],
-                    background=colors[1],
+					foreground=colors[3],
+                    background=colors[0],
 					font="Font Awesome 5 Free Solid",
-					fontsize=34,
-					padding= 5,
+					fontsize=23,
+					padding= 3,
 					mouse_callbacks={"Button1": open_powermenu},
 				),
            widget.Spacer(
@@ -591,7 +565,7 @@ def init_widgets_screen2():
     return widgets_screen2                 # Monitor 2 will display all widgets in widgets_list
 
 def init_screens():
-    return [Screen(top=bar.Bar(widgets=init_widgets_screen1(), size=35,  opacity=0.9,bottom=bar.Gap(18),left=bar.Gap(18),right=bar.Gap(18), margin=[5, 3, 0, 3])),
+    return [Screen(top=bar.Bar(widgets=init_widgets_screen1(), size=40,  opacity=0.9,bottom=bar.Gap(18),left=bar.Gap(18),right=bar.Gap(18), margin=[5, 3, 0, 3])),
             Screen(top=bar.Bar(widgets=init_widgets_screen2(), opacity=0.9,bottom=bar.Gap(18),left=bar.Gap(18),right=bar.Gap(18), size=35, margin=[5,3,0,3])),
             Screen(top=bar.Bar(widgets=init_widgets_screen1(), opacity=0.9,bottom=bar.Gap(18),left=bar.Gap(18),right=bar.Gap(18), size=35, margin=[5,3,0,3]))]
 

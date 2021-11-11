@@ -1,0 +1,249 @@
+
+def init_widgets_list():
+    widgets_list = [
+            widget.Spacer(
+                length = 2,
+                background = colors[0]
+            ),
+
+            # Left Side of the bar
+
+             widget.Sep(
+                linewidth = 3,
+                background = colors[0]
+            ),
+             widget.TextBox(
+					text="  ", #(cool icon) and 
+					foreground=colors[13],
+					background=colors[0],
+					font="Font Awesome 5 Free Solid",
+					fontsize=24,
+					padding=5,
+					mouse_callbacks={"Button1": open_launcher},
+				),
+			
+            widget.TextBox(
+                font = "Iosevka Nerd Font",
+                fontsize = 18,
+                text = "",
+                foreground = colors[2],
+                background = colors[0]
+            ),
+            widget.CPU(
+                font = "Source Code Pro Medium",
+                format = "{load_percent}%",
+                fontsize = 16,
+                foreground = colors[2],
+                background = colors[0],
+                update_interval = 5
+            ),
+            widget.TextBox(
+                font = "Iosevka Nerd Font",
+                fontsize = 18,
+                text = "",
+                foreground = colors[11],
+                background = colors[0]
+            ),
+            widget.Memory(
+                font = "Source Code Pro Medium",
+                fontsize = 16,
+                format = "{MemUsed:.0f}{mm}",
+                foreground = colors[11],
+                background = colors[0],
+                update_interval = 5
+            ),
+#            widget.TextBox(
+ #               font = "Iosevka Nerd Font",
+  #              fontsize = 17,
+   #             text = "",
+    #            foreground = colors[2],
+     #           background = colors[0]
+      #      ),
+ #           widget.NvidiaSensors(
+  #                 font = "Source Code Pro Medium",
+   #             fontsize = 16,
+    #            foreground = colors[2],
+     #           foreground_alert = colors[2],
+      #          background = colors[0],
+       #         update_interval = 5
+        #    ),
+        #  widget.Spacer(
+       #         length = 5,
+      #          background = colors[1]
+     #       ),
+            widget.TextBox(
+                font = "Iosevka Nerd Font",
+                fontsize = 17,
+                text ="",
+                foreground = colors[12],
+                background = colors[0]
+            ),
+        widget.Net(
+                format = "{down} ↓↑ {up}",
+                foreground = colors[12],
+                background = colors[0],
+                update_interval = 5
+            ),
+                        widget.Systray(
+                        background=colors[0],
+                        icon_size=20,
+                        padding = 4
+                        ),
+        widget.TextBox(
+					text="",
+					foreground=colors[0],
+					background=colors[1],
+					fontsize=64,
+					padding=0,
+				),
+           widget.Spacer(
+                length = bar.STRETCH,
+                background = colors[1]
+            ),
+
+
+
+            #### Center bar ---------------------------------------
+
+
+        				widget.TextBox(
+					text="",
+					foreground=colors[0],
+					background=colors[1],
+					fontsize=64,
+					padding=0,
+				),
+             widget.GroupBox(
+                       font = "Source Code Pro",
+                       disable_drag = True,
+                       fontsize = 20,
+                       margin_y = 5,
+                       margin_x = 3,
+                       padding_y = 2,
+                       padding_x = 0,
+                       borderwidth = 4,
+                       active = colors[2],
+                       inactive = colors[2],
+                       rounded = True,
+                       highlight_color = colors[1],
+                       highlight_method = "line",
+                       this_current_screen_border = colors[2],
+                       this_screen_border = colors [2],
+                       other_current_screen_border = colors[2],
+                       other_screen_border = colors[3],
+                       foreground = colors[2],
+                       background = colors[0]
+                       ),
+         				widget.TextBox(
+					text="",
+					foreground=colors[0],
+					background=colors[1],
+					fontsize=64,
+					padding=0,
+				),
+
+ ### Right Side of the bar----------------------------------------
+
+        widget.Spacer(
+                length = bar.STRETCH,
+                background = colors[1]
+            ),
+
+     #qtile has some problems with displaying screen brightness, need to fix
+        				widget.TextBox(
+					text="",
+					foreground=colors[0],
+					background=colors[1],
+					fontsize=64,
+					padding=0,
+				),
+        widget.TextBox(
+                       text = "", #Arch icon: 
+                       padding = 2,
+                       foreground = colors[7],
+                       background = colors[0],
+                       fontsize = 17,
+                       font = "Iosevka Nerd Font",
+                       ),
+            widget.CurrentLayout(
+                font = "Source Code Pro Medium",
+                fontsize = 16,
+                foreground = colors[7],
+                background = colors[0]
+            ),
+
+           # there is a BatteryIcon widget that changes the battery icon as the battery gets depleted, implement it later.
+            widget.TextBox(
+                font="FontAwesome",
+                 text=" ",
+               foreground=colors[9],
+                background=colors[0],
+                padding = 0,
+                fontsize=18
+            ),
+            widget.Battery(
+                font="Noto Sans",
+                format = "{percent:2.0%}",
+                         update_interval = 60,
+                         fontsize = 16,
+                         foreground = colors[9],
+                        background = colors[0],
+	                     ),
+            widget.TextBox(
+               text = " Vol",
+               foreground = colors[8],
+                background = colors[0],
+                padding = 0,
+                fontsize=16
+                       ),
+              widget.Volume(
+                       foreground = colors[8],
+                       background = colors[0],
+                       padding = 5,
+                       fontsize = 16,
+                       update_interval = 0.1,
+                       step = 5
+                       ),
+  #          widget.TextBox(
+   #             font = "Iosevka Nerd Font",
+    #            fontsize = 18,
+     #           text = "",
+      #          foreground = colors[2],
+       #         background = colors[0]
+        #    ),
+            widget.TextBox(
+                font = "Iosevka Nerd Font",
+                fontsize = 18,
+                text = "",
+                foreground = colors[4],
+                background = colors[0]
+            ),
+            widget.Clock(
+                font = "Source Code Pro Medium",
+                format = ' %a %d %b(%m)',
+                fontsize = 16,
+                foreground = colors[4],
+                background = colors[0]
+            ),
+            widget.Clock(
+                font = "Source Code Pro Medium",
+                format = '%I:%M:%S %p ',
+                fontsize = 16,
+                foreground = colors[4],
+                background = colors[0]
+            ),
+				widget.TextBox(
+					text="⏻",
+					foreground=colors[3],
+                    background=colors[0],
+					font="Font Awesome 5 Free Solid",
+					fontsize=23,
+					padding= 3,
+					mouse_callbacks={"Button1": open_powermenu},
+				),
+           widget.Spacer(
+                length = 5,
+                background = colors[0]
+            )
+        ]
+    return widgets_list

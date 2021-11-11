@@ -53,7 +53,7 @@ keys = [
              desc='Doom Emacs'
              ),
           Key([mod, "shift"], "e", lazy.spawn('firefox'), desc="Launches Firefox Web Browser"),
-          Key([mod, "shift"], "f", lazy.spawn('thunar'), desc="Launches thunar File Manager"),
+          Key([mod, "shift"], "f", lazy.spawn('nemo'), desc="Launches File Manager"),
          # Key([mod, "shift"], "c", lazy.spawn('google-chrome'), desc="Launches chrome"),(doesnt seem to work)
 
 
@@ -282,7 +282,7 @@ layout.MonadWide(**layout_theme),
 widget_defaults = dict(
     font="Source Code Pro Medium",
     fontsize = 16,
-    padding = 5,
+    padding = 8,
     foreground = colors[2],
     background=colors[0]
 )
@@ -291,9 +291,9 @@ extension_defaults = widget_defaults.copy()
 
 ### Mouse_callback functions
 def open_launcher():
-	qtile.cmd_spawn("./.config/rofi/launchers/ribbon/launcher.sh")
+	qtile.cmd_spawn("dmenu_run -fn 'Source Code Pro -14'")
 def open_powermenu():
-	qtile.cmd_spawn("./.config/rofi/powermenu/powermenu.sh")
+	qtile.cmd_spawn("systemctl suspend")
 
 
 def init_widgets_list():
@@ -517,7 +517,7 @@ def init_widgets_list():
             ),
             widget.Clock(
                 font = "Source Code Pro Medium",
-                format = ' %a %d %b(%m)',
+                format = '%a %d %b(%m)',
                 fontsize = 16,
                 foreground = colors[4],
                 background = colors[0]
@@ -565,7 +565,7 @@ def init_widgets_screen2():
     return widgets_screen2                 # Monitor 2 will display all widgets in widgets_list
 
 def init_screens():
-    return [Screen(top=bar.Bar(widgets=init_widgets_screen1(), size=40,  opacity=0.9,bottom=bar.Gap(18),left=bar.Gap(18),right=bar.Gap(18), margin=[5, 3, 0, 3])),
+    return [Screen(top=bar.Bar(widgets=init_widgets_screen1(), size=35,  opacity=1.0,bottom=bar.Gap(18),left=bar.Gap(18),right=bar.Gap(18), margin=[0,0,0,0])),
             Screen(top=bar.Bar(widgets=init_widgets_screen2(), opacity=0.9,bottom=bar.Gap(18),left=bar.Gap(18),right=bar.Gap(18), size=35, margin=[5,3,0,3])),
             Screen(top=bar.Bar(widgets=init_widgets_screen1(), opacity=0.9,bottom=bar.Gap(18),left=bar.Gap(18),right=bar.Gap(18), size=35, margin=[5,3,0,3]))]
 

@@ -338,50 +338,35 @@ def init_widgets_list():
                 font = "Iosevka Nerd Font",
                 fontsize = 18,
                 text = "",
-                foreground = colors[11],
+                foreground = colors[5],
                 background = colors[0]
             ),
             widget.Memory(
                 font = "Source Code Pro Medium",
                 fontsize = 16,
                 format = "{MemUsed:.0f}{mm}",
-                foreground = colors[11],
+                foreground = colors[5],
                 background = colors[0],
                 update_interval = 5
             ),
-#            widget.TextBox(
- #               font = "Iosevka Nerd Font",
-  #              fontsize = 17,
-   #             text = "",
-    #            foreground = colors[2],
-     #           background = colors[0]
-      #      ),
- #           widget.NvidiaSensors(
-  #                 font = "Source Code Pro Medium",
-   #             fontsize = 16,
-    #            foreground = colors[2],
-     #           foreground_alert = colors[2],
-      #          background = colors[0],
-       #         update_interval = 5
-        #    ),
-        #  widget.Spacer(
-       #         length = 5,
-      #          background = colors[1]
-     #       ),
             widget.TextBox(
                 font = "Iosevka Nerd Font",
                 fontsize = 17,
-                text ="",
+                text = "",
                 foreground = colors[12],
                 background = colors[0]
             ),
-        widget.Net(
-                format = "{down} ↓↑ {up}",
+            widget.NvidiaSensors(
+                   font = "Source Code Pro Medium",
+                fontsize = 16,
                 foreground = colors[12],
+                foreground_alert = colors[2],
                 background = colors[0],
                 update_interval = 5
             ),
-                        widget.Systray(
+         widget.NetGraph(
+         ),#Icon:              
+         widget.Systray(
                         background=colors[0],
                         icon_size=20,
                         padding = 4

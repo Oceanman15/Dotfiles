@@ -212,7 +212,8 @@ for i, (name, kwargs) in enumerate(group_names, 1):
 
 
 colors = [
-	["#2e3440", "#2e3440"],  # 0 background
+	#["#2e3440", "#2e3440"],  # 0 background
+	["#3b4252", "#3b4252"],  # 0 background
 	["#3b4252", "#3b4252"],  # 1 background lighter
 	["#81a1c1", "#81a1c1"],  # 2 foreground
 	["#bf616a", "#bf616a"],  # 3 red

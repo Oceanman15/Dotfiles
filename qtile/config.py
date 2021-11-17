@@ -213,7 +213,7 @@ for i, (name, kwargs) in enumerate(group_names, 1):
 
 colors = [
 	["#242831", "#242831"],  # 0 super dark background
-	#["#3b4252", "#3b4252"],  # 0 background
+	#["#3b4252", "#3b4252"],  # 0 background or #2e3440(though this color may mess with nordic wallpaper backgrounds)
 	["#3b4252", "#3b4252"],  # 1 background lighter
 	["#81a1c1", "#81a1c1"],  # 2 foreground
 	["#bf616a", "#bf616a"],  # 3 red
@@ -305,10 +305,6 @@ def init_widgets_list():
 
             # Left Side of the bar
 
-             widget.Sep(
-                linewidth = 3,
-                background = colors[0]
-            ),
              widget.TextBox(
 					text="  ", #(cool icon) and 
 					foreground=colors[13],
@@ -657,3 +653,4 @@ def start_once():
 # We choose LG3D to maximize irony: it is a 3D non-reparenting WM written in
 # java that happens to be on java's whitelist.
 wmname = "LG3D"
+

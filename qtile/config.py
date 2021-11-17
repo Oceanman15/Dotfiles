@@ -212,8 +212,8 @@ for i, (name, kwargs) in enumerate(group_names, 1):
 
 
 colors = [
-	#["#2e3440", "#2e3440"],  # 0 background
-	["#3b4252", "#3b4252"],  # 0 background
+	["#242831", "#242831"],  # 0 super dark background
+	#["#3b4252", "#3b4252"],  # 0 background
 	["#3b4252", "#3b4252"],  # 1 background lighter
 	["#81a1c1", "#81a1c1"],  # 2 foreground
 	["#bf616a", "#bf616a"],  # 3 red
@@ -227,7 +227,6 @@ colors = [
 	["#d08770", "#d08770"],  # 11 orange
 	["#8fbcbb", "#8fbcbb"],  # 12 super cyan
 	["#5e81ac", "#5e81ac"],  # 13 super blue
-	["#242831", "#242831"],  # 14 super dark background
 ]
 prompt = "{0}@{1}: ".format(os.environ["USER"], socket.gethostname())
 
@@ -551,7 +550,7 @@ def init_widgets_screen2():
     return widgets_screen2                 # Monitor 2 will display all widgets in widgets_list
 
 def init_screens():
-    return [Screen(top=bar.Bar(widgets=init_widgets_screen1(), size=35,  opacity=1.0,bottom=bar.Gap(18),left=bar.Gap(18),right=bar.Gap(18), margin=[0,0,0,0])),
+    return [Screen(top=bar.Bar(widgets=init_widgets_screen1(), size=35,  opacity=1.0,bottom=bar.Gap(18),left=bar.Gap(18),right=bar.Gap(18), margin=[5,15,0,15])),
             Screen(top=bar.Bar(widgets=init_widgets_screen2(), opacity=0.9,bottom=bar.Gap(18),left=bar.Gap(18),right=bar.Gap(18), size=35, margin=[5,3,0,3])),
             Screen(top=bar.Bar(widgets=init_widgets_screen1(), opacity=0.9,bottom=bar.Gap(18),left=bar.Gap(18),right=bar.Gap(18), size=35, margin=[5,3,0,3]))]
 

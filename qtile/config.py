@@ -25,7 +25,7 @@ keys = [
          Key([mod], "d",
             #lazy.spawn("wofi --show drun -config ~/.config/wofi/config -style ~/.config/wofi/style.css"),
             #lazy.spawn("rofi -show drun -config ~/.config/rofi/launchers/text/style_3.rasi"),
-             lazy.spawn("dmenu_run -fn 'Source Code Pro -14'"),
+             lazy.spawn("dmenu_run -fn 'Source Code Pro -30'"),
             desc='Run Launcher'
              ),
          Key([mod], "Tab",
@@ -545,8 +545,8 @@ def init_widgets_screen2():
     del widgets_screen2[7:8]               # Slicing removes unwanted widgets (systray) on Monitors 1,
     return widgets_screen2                 # Monitor 2 will display all widgets in widgets_list
 
-def init_screens():
-    return [Screen(top=bar.Bar(widgets=init_widgets_screen1(), size=35,  opacity=1.0,bottom=bar.Gap(18),left=bar.Gap(18),right=bar.Gap(18), margin=[5,15,0,15])),
+def init_screens():#margin = (above bar, left of bar, below bar, right of bar)
+    return [Screen(top=bar.Bar(widgets=init_widgets_screen1(), size=35,  opacity=1.0,bottom=bar.Gap(18),left=bar.Gap(18),right=bar.Gap(18), margin=[0,15,0,15])),
             Screen(top=bar.Bar(widgets=init_widgets_screen2(), opacity=0.9,bottom=bar.Gap(18),left=bar.Gap(18),right=bar.Gap(18), size=35, margin=[5,3,0,3])),
             Screen(top=bar.Bar(widgets=init_widgets_screen1(), opacity=0.9,bottom=bar.Gap(18),left=bar.Gap(18),right=bar.Gap(18), size=35, margin=[5,3,0,3]))]
 

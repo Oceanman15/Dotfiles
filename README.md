@@ -12,3 +12,4 @@ Have fun.
 Personal to-dos: 
 make icons only dependent on ttf-font-awsome from aur. 
 icons that font awsome cannot cover will be replaced with qtile bar's image widget. Icons will be created through gimp and pasted onto the bar as an image that functions identically to the original/traditional font-awsome icons. such icons will be stored in .config/qtile/icons directory which you can find on this repo. 
+To do this though, I will have to learn how to use Gimp which will have to wait till after exams and interviews. 

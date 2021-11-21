@@ -53,7 +53,7 @@ keys = [
              desc='Doom Emacs'
              ),
           Key([mod, "shift"], "e", lazy.spawn('firefox'), desc="Launches Firefox Web Browser"),
-          Key([mod, "shift"], "f", lazy.spawn('nemo'), desc="Launches File Manager"),
+          Key([mod, "shift"], "f", lazy.spawn('pcmanfm'), desc="Launches File Manager"),
          # Key([mod, "shift"], "c", lazy.spawn('google-chrome'), desc="Launches chrome"),(doesnt seem to work)
 
 
@@ -241,6 +241,7 @@ layout_theme = {"border_width": 2,
 
 layouts = [
     #layout.MonadWide(**layout_theme),
+    #layout.Max(**layout_theme),
     #layout.Bsp(**layout_theme),
     #layout.Stack(stacks=2, **layout_theme),
     #layout.Columns(**layout_theme),
@@ -253,7 +254,7 @@ layouts = [
                       ratio=0.55,
                      ),
 layout.MonadWide(**layout_theme),
- layout.Zoomy(**layout_theme),
+ layout.Max(**layout_theme),
     layout.RatioTile(**layout_theme),
     layout.Floating(**layout_theme),
   #  layout.TreeTab(
@@ -368,11 +369,11 @@ def init_widgets_list():
                         padding = 4
                         ),
         widget.TextBox(
-					text="",
-					foreground=colors[0],
-					background=colors[1],
-					fontsize=64,
-					padding=0,
+	    text="",
+	    foreground=colors[0],
+	    background=colors[1],
+	    fontsize=120,
+	    padding=0,
 				),
            widget.Spacer(
                 length = bar.STRETCH,
@@ -435,6 +436,11 @@ def init_widgets_list():
 					fontsize=64,
 					padding=0,
 				),
+				# for image widget that will replace the above textbox: 
+				#widget.Image(
+				#	filename = ".config/qtile/icons/circle-half.png",
+				#	background=colors[0],
+				#),
         widget.TextBox(
                        text = "", #Arch icon: 
                        padding = 2,
@@ -546,7 +552,7 @@ def init_widgets_screen2():
     return widgets_screen2                 # Monitor 2 will display all widgets in widgets_list
 
 def init_screens():#margin = (above bar, left of bar, below bar, right of bar)
-    return [Screen(top=bar.Bar(widgets=init_widgets_screen1(), size=35,  opacity=1.0,bottom=bar.Gap(18),left=bar.Gap(18),right=bar.Gap(18), margin=[0,15,0,15])),
+    return [Screen(top=bar.Bar(widgets=init_widgets_screen1(), size=35,  opacity=1.0,bottom=bar.Gap(18),left=bar.Gap(18),right=bar.Gap(18), margin=[0,0,0,0])),
             Screen(top=bar.Bar(widgets=init_widgets_screen2(), opacity=0.9,bottom=bar.Gap(18),left=bar.Gap(18),right=bar.Gap(18), size=35, margin=[5,3,0,3])),
             Screen(top=bar.Bar(widgets=init_widgets_screen1(), opacity=0.9,bottom=bar.Gap(18),left=bar.Gap(18),right=bar.Gap(18), size=35, margin=[5,3,0,3]))]
 
@@ -653,4 +659,5 @@ def start_once():
 # We choose LG3D to maximize irony: it is a 3D non-reparenting WM written in
 # java that happens to be on java's whitelist.
 wmname = "LG3D"
+
 

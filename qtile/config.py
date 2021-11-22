@@ -345,6 +345,8 @@ def init_widgets_list():
                 background = colors[1],
                 update_interval = 5
             ),
+widget.NetGraph(
+         ),#Icon:
                 ]),
 widget.WindowName(
         font = "Source Code Pro Medium",

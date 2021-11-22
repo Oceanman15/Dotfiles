@@ -195,7 +195,7 @@ keys = [
 
 #Workspaces:
 group_names = [("", {'layout': 'monadwide'}),
-               ("", {'layout': 'monadtall'}),#
+               ("", {'layout': 'monadtall'}),#
                ("", {'layout': 'monadtall'}),
                ("", {'layout': 'monadtall'}),
                ("", {'layout': 'monadtall'}),
@@ -285,14 +285,15 @@ widget_defaults = dict(
     fontsize = 16,
     padding = 8,
     foreground = colors[2],
-    background=colors[0]
+    background=colors[1]
 )
 extension_defaults = widget_defaults.copy()
 
 
 ### Mouse_callback functions
-def open_launcher():
-	qtile.cmd_spawn("dmenu_run -fn 'Source Code Pro -30'")
+
+#def open_launcher():
+#	qtile.cmd_spawn()
 def open_powermenu():
 	qtile.cmd_spawn("systemctl suspend")
 
@@ -306,21 +307,12 @@ def init_widgets_list():
 
             # Left Side of the bar
 
-             widget.TextBox(
-					text="  ", #(cool icon) and 
-					foreground=colors[13],
-					background=colors[0],
-					font="Font Awesome 5 Free Solid",
-					fontsize=24,
-					padding=5,
-					mouse_callbacks={"Button1": open_launcher},
-				),
-           widget.GroupBox(
+             widget.GroupBox(
                        font = "Source Code Pro",
                        disable_drag = True,
                        fontsize = 18,
-                       margin_y = 5,
-                       margin_x = 10,
+                       margin_y = 3,
+                       margin_x = 15,
                        padding_y = 2,
                        padding_x = 0,
                        borderwidth = 4,
@@ -336,24 +328,72 @@ def init_widgets_list():
                        foreground = colors[2],
                        background = colors[0]
                        ),
- ### Right Side of the bar----------------------------------------
+ ### Centre of the bar----------------------------------------
 
  widget.Spacer(
                 length = 8,
                 background = colors[1]
             ),
+            widget.WidgetBox(
+                widgets=[
+            widget.TextBox(
+                font = "Iosevka Nerd Font",
+                fontsize = 18,
+                text = "",
+                foreground = colors[2],
+                background = colors[1]
+            ),
+            widget.CPU(
+                font = "Source Code Pro Medium",
+                format = "{load_percent}%",
+                fontsize = 16,
+                foreground = colors[2],
+                background = colors[1],
+                update_interval = 5
+            ),
+            widget.TextBox(
+                font = "Iosevka Nerd Font",
+                fontsize = 18,
+                text = "",
+                foreground = colors[5],
+                background = colors[1]
+            ),
+            widget.Memory(
+                font = "Source Code Pro Medium",
+                fontsize = 16,
+                format = "{MemUsed:.0f}{mm}",
+                foreground = colors[5],
+                background = colors[1],
+                update_interval = 5
+            ),
+            widget.TextBox(
+                font = "Iosevka Nerd Font",
+                fontsize = 17,
+                text = "",
+                foreground = colors[12],
+                background = colors[1]
+            ),
+            widget.NvidiaSensors(
+                   font = "Source Code Pro Medium",
+                fontsize = 16,
+                foreground = colors[12],
+                foreground_alert = colors[2],
+                background = colors[1],
+                update_interval = 5
+            ),
+                ]),
 widget.WindowName(
         font = "Source Code Pro Medium",
                 fontsize = 16,
                 foreground = colors[12],
                 background = colors[1],
-                max_chars = 20,
+                max_chars = 40,
                 ),
         widget.Spacer(
                 length = bar.STRETCH,
                 background = colors[1]
             ),
-
+###Right-side of bar---------------------------------
        widget.TextBox(
                        text = "  ", #Arch icon: 
                        padding = 2,

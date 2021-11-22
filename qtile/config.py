@@ -155,42 +155,6 @@ keys = [
     Key([], "XF86AudioRaiseVolume", lazy.spawn("amixer set Master 5%+")),
     Key([], "XF86AudioLowerVolume", lazy.spawn("amixer set Master 5%-")),
     Key([], "XF86AudioMute", lazy.spawn("amixer -D pulse set Master 1+ toggle")),
-
-          # Emacs programs launched using the key chord CTRL+e followed by 'key'
-  #       KeyChord(["control"],"e", [
-  #           Key([], "e",
-  #               lazy.spawn("emacsclient -c -a 'emacs'"),
-  #               desc='Launch Emacs'
-  #               ),
-  #           Key([], "b",
-  #               lazy.spawn("emacsclient -c -a 'emacs' --eval '(ibuffer)'"),
-  #               desc='Launch ibuffer inside Emacs'
-  #               ),
-  #           Key([], "d",
-  #               lazy.spawn("emacsclient -c -a 'emacs' --eval '(dired nil)'"),
-  #               desc='Launch dired inside Emacs'
-  #               ),
-  #           Key([], "i",
-  #               lazy.spawn("emacsclient -c -a 'emacs' --eval '(erc)'"),
-  #               desc='Launch erc inside Emacs'
-  #               ),
-  #           Key([], "m",
-  #               lazy.spawn("emacsclient -c -a 'emacs' --eval '(mu4e)'"),
-  #               desc='Launch mu4e inside Emacs'
-  #               ),
-  #           Key([], "n",
-  #               lazy.spawn("emacsclient -c -a 'emacs' --eval '(elfeed)'"),
-  #               desc='Launch elfeed inside Emacs'
-  #               ),
-  #           Key([], "s",
-  #               lazy.spawn("emacsclient -c -a 'emacs' --eval '(eshell)'"),
-  #               desc='Launch the eshell inside Emacs'
-  #               ),
-  #           Key([], "v",
-  #               lazy.spawn("emacsclient -c -a 'emacs' --eval '(+vterm/here nil)'"),
-  #               desc='Launch vterm inside Emacs'
-  #               )
-  #       ])
 ]
 
 #Workspaces:

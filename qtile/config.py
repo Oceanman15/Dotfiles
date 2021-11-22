@@ -602,9 +602,9 @@ def assign_app_group(client):
     d[group_names[3][0]] = []
     d[group_names[4][0]] = []
     d[group_names[5][0]] = []
-    d[group_names[6][0]] = ['discord']
-    d[group_names[7][0]] = ['vlc', 'obs', 'mpv', 'mplayer', 'lxmusic', 'gimp', 'lutris']
-    d[group_names[8][0]] = ['gparted', 'wdisplays', 'pavucontrol', 'arandr']
+    d[group_names[6][0]] = []
+    d[group_names[7][0]] = []
+    d[group_names[8][0]] = []
 
     wm_class = client.window.get_wm_class()[0]
     for i in range(len(d)):

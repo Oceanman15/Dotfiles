@@ -1,0 +1,149 @@
+
+def init_widgets_list():
+    widgets_list = [
+            widget.Spacer(
+                length = 2,
+                background = colors[0]
+            ),
+
+            # Left Side of the bar
+
+             widget.TextBox(
+					text="  ", #(cool icon) and 
+					foreground=colors[13],
+					background=colors[0],
+					font="Font Awesome 5 Free Solid",
+					fontsize=24,
+					padding=5,
+					mouse_callbacks={"Button1": open_launcher},
+				),
+           widget.GroupBox(
+                       font = "Source Code Pro",
+                       disable_drag = True,
+                       fontsize = 18,
+                       margin_y = 5,
+                       margin_x = 10,
+                       padding_y = 2,
+                       padding_x = 0,
+                       borderwidth = 4,
+                       active = colors[2],
+                       inactive = colors[2],
+                       rounded = True,
+                       highlight_color = colors[1],
+                       highlight_method = "line",
+                       this_current_screen_border = colors[2],
+                       this_screen_border = colors [2],
+                       other_current_screen_border = colors[2],
+                       other_screen_border = colors[3],
+                       foreground = colors[2],
+                       background = colors[0]
+                       ),
+ ### Right Side of the bar----------------------------------------
+
+ widget.Spacer(
+                length = 8,
+                background = colors[1]
+            ),
+widget.WindowName(
+        font = "Source Code Pro Medium",
+                fontsize = 16,
+                foreground = colors[12],
+                background = colors[1],
+                max_chars = 20,
+                ),
+        widget.Spacer(
+                length = bar.STRETCH,
+                background = colors[1]
+            ),
+
+       widget.TextBox(
+                       text = "", #Arch icon: 
+                       padding = 2,
+                       foreground = colors[7],
+                       background = colors[0],
+                       fontsize = 17,
+                       font = "Iosevka Nerd Font",
+                       ),
+            widget.CurrentLayout(
+                font = "Source Code Pro Medium",
+                fontsize = 16,
+                foreground = colors[7],
+                background = colors[0]
+            ),
+
+           # there is a BatteryIcon widget that changes the battery icon as the battery gets depleted, implement it later.
+            widget.TextBox(
+                font="FontAwesome",
+                 text=" ",
+               foreground=colors[9],
+                background=colors[0],
+                padding = 0,
+                fontsize=18
+            ),
+            widget.Battery(
+                font="Noto Sans",
+                format = "{percent:2.0%}",
+                         update_interval = 60,
+                         fontsize = 16,
+                         foreground = colors[9],
+                        background = colors[0],
+	                     ),
+            widget.TextBox(
+               text = " Vol",
+               foreground = colors[8],
+                background = colors[0],
+                padding = 0,
+                fontsize=16
+                       ),
+              widget.Volume(
+                       foreground = colors[8],
+                       background = colors[0],
+                       padding = 5,
+                       fontsize = 16,
+                       update_interval = 0.1,
+                       step = 5
+                       ),
+  #          widget.TextBox(
+   #             font = "Iosevka Nerd Font",
+    #            fontsize = 18,
+     #           text = "",
+      #          foreground = colors[2],
+       #         background = colors[0]
+        #    ),
+            widget.TextBox(
+                font = "Iosevka Nerd Font",
+                fontsize = 18,
+                text = "",
+                foreground = colors[4],
+                background = colors[0]
+            ),
+            widget.Clock(
+                font = "Source Code Pro Medium",
+                format = '%a %d %b(%m)',
+                fontsize = 16,
+                foreground = colors[4],
+                background = colors[0]
+            ),
+            widget.Clock(
+                font = "Source Code Pro Medium",
+                format = '%I:%M:%S %p ',
+                fontsize = 16,
+                foreground = colors[4],
+                background = colors[0]
+            ),
+				widget.TextBox(
+					text="⏻",
+					foreground=colors[3],
+                    background=colors[0],
+					font="Font Awesome 5 Free Solid",
+					fontsize=23,
+					padding= 2,
+					mouse_callbacks={"Button1": open_powermenu},
+				),
+           widget.Spacer(
+                length = 5,
+                background = colors[0]
+            )
+        ]
+    return widgets_list
+

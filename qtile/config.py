@@ -197,9 +197,9 @@ prompt = "{0}@{1}: ".format(os.environ["USER"], socket.gethostname())
 
 #Layouts:
 
-layout_theme = {"border_width": 2,
-                "margin": 8,
-                "border_focus": "#e5e9f0",
+layout_theme = {"border_width": 4,
+                "margin": 2,
+                "border_focus": "#bf616a",
                 "border_normal": "#81A1C1"
                 }
 
@@ -355,6 +355,7 @@ widget.WindowName(
                 background = colors[1],
                 max_chars = 40,
                 ),
+        widget.Systray(),
         widget.Spacer(
                 length = bar.STRETCH,
                 background = colors[1]

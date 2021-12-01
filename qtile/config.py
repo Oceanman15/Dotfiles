@@ -191,6 +191,8 @@ colors = [
 	["#d08770", "#d08770"],  # 11 orange
 	["#8fbcbb", "#8fbcbb"],  # 12 super cyan
 	["#5e81ac", "#5e81ac"],  # 13 super blue
+    ["#61afef", "#61afef"],  # 14 blue
+    ["#333945", "#333945"],  # 15 one dark black-bright(doom emac's highlighted text color)
 ]
 prompt = "{0}@{1}: ".format(os.environ["USER"], socket.gethostname())
 
@@ -296,23 +298,23 @@ def init_widgets_list():
 
  widget.Spacer(
                 length = 8,
-                background = colors[1]
+                background = colors[15]
             ),
-            widget.WidgetBox(
-                widgets=[
+ #           widget.WidgetBox(
+  #              widgets=[
             widget.TextBox(
                 font = "Iosevka Nerd Font",
                 fontsize = 18,
                 text = "",
-                foreground = colors[2],
-                background = colors[1]
+                foreground = colors[14],
+                background = colors[15]
             ),
             widget.CPU(
                 font = "Source Code Pro Medium",
                 format = "{load_percent}%",
                 fontsize = 16,
-                foreground = colors[2],
-                background = colors[1],
+                foreground = colors[14],
+                background = colors[15],
                 update_interval = 5
             ),
             widget.TextBox(
@@ -320,14 +322,14 @@ def init_widgets_list():
                 fontsize = 18,
                 text = "",
                 foreground = colors[5],
-                background = colors[1]
+                background = colors[15]
             ),
             widget.Memory(
                 font = "Source Code Pro Medium",
                 fontsize = 16,
                 format = "{MemUsed:.0f}{mm}",
                 foreground = colors[5],
-                background = colors[1],
+                background = colors[15],
                 update_interval = 5
             ),
             widget.TextBox(
@@ -335,30 +337,33 @@ def init_widgets_list():
                 fontsize = 17,
                 text = "",
                 foreground = colors[12],
-                background = colors[1]
+                background = colors[15]
             ),
             widget.NvidiaSensors(
                    font = "Source Code Pro Medium",
                 fontsize = 16,
                 foreground = colors[12],
                 foreground_alert = colors[2],
-                background = colors[1],
+                background = colors[15],
                 update_interval = 5
             ),
 widget.NetGraph(
+         background = colors[15]
          ),#Icon:
-                ]),
-widget.WindowName(
-        font = "Source Code Pro Medium",
-                fontsize = 16,
-                foreground = colors[12],
-                background = colors[1],
-                max_chars = 40,
+ #widgetbox,remove this to enable               ]),
+#widget.WindowName(
+ #       font = "Source Code Pro Medium",
+  #              fontsize = 16,
+   #             foreground = colors[12],
+    #            background = colors[1],
+     #           max_chars = 40,
+      #          ),
+        widget.Systray(
+                 background = colors[15]
                 ),
-        widget.Systray(),
         widget.Spacer(
                 length = bar.STRETCH,
-                background = colors[1]
+                background = colors[15]
             ),
 ###Right-side of bar---------------------------------
        widget.TextBox(
@@ -473,8 +478,8 @@ def init_widgets_screen2():
 
 def init_screens():#margin = (above bar, left of bar, below bar, right of bar)
     return [Screen(top=bar.Bar(widgets=init_widgets_screen1(), size=30,  opacity=1.0,bottom=bar.Gap(18),left=bar.Gap(18),right=bar.Gap(18), margin=[0,0,0,0])),
-            Screen(top=bar.Bar(widgets=init_widgets_screen2(), opacity=0.9,bottom=bar.Gap(18),left=bar.Gap(18),right=bar.Gap(18), size=35, margin=[5,3,0,3])),
-            Screen(top=bar.Bar(widgets=init_widgets_screen1(), opacity=0.9,bottom=bar.Gap(18),left=bar.Gap(18),right=bar.Gap(18), size=35, margin=[5,3,0,3]))]
+            Screen(top=bar.Bar(widgets=init_widgets_screen2(), opacity=0.9,bottom=bar.Gap(18),left=bar.Gap(18),right=bar.Gap(18), size=35, margin=[0,0,0,0])),
+            Screen(top=bar.Bar(widgets=init_widgets_screen1(), opacity=0.9,bottom=bar.Gap(18),left=bar.Gap(18),right=bar.Gap(18), size=35, margin=[0,0,0,0]))]
 
 if __name__ in ["config", "__main__"]:
     screens = init_screens()

@@ -176,8 +176,9 @@ for i, (name, kwargs) in enumerate(group_names, 1):
 
 
 colors = [
-	["#242831", "#242831"],  # 0 super dark background
-	#["#3b4252", "#3b4252"],  # 0 background or #2e3440(though this color may mess with nordic wallpaper backgrounds)
+ 	["#1E222A", "#1E222A"],  # 0 super dark one-dark background,very similar to the super dark nordic background      
+#	["#242831", "#242831"],  # 0 super dark nordic background
+	#["#2e3440", "#2e3440"], # 0 lighter dark nordic background(same color as nordic wallpaper backgrounds however)
 	["#3b4252", "#3b4252"],  # 1 background lighter
 	["#81a1c1", "#81a1c1"],  # 2 foreground
 	["#bf616a", "#bf616a"],  # 3 red

@@ -22,7 +22,7 @@ keys = [
              lazy.spawn(myTerm),
              desc='Launches My Terminal'
              ),
-         Key([mod], "d",
+         Key(["mod4"], "d",
             #lazy.spawn("wofi --show drun -config ~/.config/wofi/config -style ~/.config/wofi/style.css"),
             #lazy.spawn("rofi -show drun -config ~/.config/rofi/launchers/text/style_3.rasi"),
              lazy.spawn("dmenu_run -fn 'Source Code Pro -30'"),

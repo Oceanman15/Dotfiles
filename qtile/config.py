@@ -22,7 +22,7 @@ keys = [
              lazy.spawn(myTerm),
              desc='Launches My Terminal'
              ),
-         Key(["mod4"], "d",
+         Key([mod], "space",
             #lazy.spawn("wofi --show drun -config ~/.config/wofi/config -style ~/.config/wofi/style.css"),
             #lazy.spawn("rofi -show drun -config ~/.config/rofi/launchers/text/style_3.rasi"),
              lazy.spawn("dmenu_run -fn 'Source Code Pro -30'"),
@@ -128,23 +128,14 @@ keys = [
              desc='toggle fullscreen'
              ),
          ### Stack controls
-          Key([mod], "space",
+          Key([mod], "d",
              lazy.layout.next(),
              desc='Switch window focus to other pane(s) of stack'
              ),
-         Key([mod, "shift"], "space",
+         Key([mod, "shift"], "d",
              lazy.layout.up(),
              desc='reverse of teh above command'
              ),
-         Key(["mod4"], "s",
-             lazy.layout.next(),
-             desc='Switch window focus to other pane(s) of stack'
-             ),
-         Key(["mod4", "shift"], "s",
-             lazy.layout.up(),
-             desc='reverse of teh above command'
-             ),
-
 
         ### Brightness, Alsa, Screenshots...
 
@@ -593,3 +584,4 @@ def start_once():
 # We choose LG3D to maximize irony: it is a 3D non-reparenting WM written in
 # java that happens to be on java's whitelist.
 wmname = "LG3D"
+

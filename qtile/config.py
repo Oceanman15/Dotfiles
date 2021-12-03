@@ -136,11 +136,11 @@ keys = [
              lazy.layout.up(),
              desc='reverse of teh above command'
              ),
-         Key([mod], "s",
+         Key(["mod4"], "s",
              lazy.layout.next(),
              desc='Switch window focus to other pane(s) of stack'
              ),
-         Key([mod, "shift"], "s",
+         Key(["mod4", "shift"], "s",
              lazy.layout.up(),
              desc='reverse of teh above command'
              ),

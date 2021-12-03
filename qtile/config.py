@@ -130,13 +130,21 @@ keys = [
          ### Stack controls
           Key([mod], "space",
              lazy.layout.next(),
-              #Not entirely sure what the difference is between layout.next and layout.down, they seem to do the same thing.
              desc='Switch window focus to other pane(s) of stack'
              ),
          Key([mod, "shift"], "space",
              lazy.layout.up(),
              desc='reverse of teh above command'
              ),
+         Key([mod], "s",
+             lazy.layout.next(),
+             desc='Switch window focus to other pane(s) of stack'
+             ),
+         Key([mod, "shift"], "s",
+             lazy.layout.up(),
+             desc='reverse of teh above command'
+             ),
+
 
         ### Brightness, Alsa, Screenshots...
 

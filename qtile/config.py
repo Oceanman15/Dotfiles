@@ -123,7 +123,7 @@ keys = [
              lazy.window.toggle_floating(),
              desc='toggle floating'
              ),
-         Key([mod], "f",
+         Key([mod], "g",
              lazy.window.toggle_fullscreen(),
              desc='toggle fullscreen'
              ),
@@ -200,7 +200,7 @@ prompt = "{0}@{1}: ".format(os.environ["USER"], socket.gethostname())
 #Layouts:
 
 layout_theme = {"border_width": 4,
-                "margin": 2,
+                "margin": 0,
                 "border_focus": "#bf616a",
                 "border_normal": "#81A1C1"
                 }
@@ -221,8 +221,8 @@ layouts = [
                      ),
 layout.MonadWide(**layout_theme),
  layout.Max(**layout_theme),
-    layout.RatioTile(**layout_theme),
-    layout.Floating(**layout_theme),
+   # layout.RatioTile(**layout_theme),
+   # layout.Floating(**layout_theme),
   #  layout.TreeTab(
   #       font = "Ubuntu",
    #      fontsize = 30,

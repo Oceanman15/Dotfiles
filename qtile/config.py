@@ -11,20 +11,17 @@ from libqtile import layout, bar, widget, hook
 from libqtile.lazy import lazy
 from typing import List  # noqa: F401
 
-mod = "mod1"                                     # Sets mod key to SUPER/WINDOWS
+mod = "mod1"                                     # Sets mod key to alt, mod4 is windows key
 myTerm = "alacritty"                             # My terminal of choice
 
 #Keybindings:
 
-keys = [
-         ### The essentials
+keys = [ ### Basics
          Key([mod], "Return",
              lazy.spawn(myTerm),
              desc='Launches My Terminal'
              ),
          Key([mod], "space",
-            #lazy.spawn("wofi --show drun -config ~/.config/wofi/config -style ~/.config/wofi/style.css"),
-            #lazy.spawn("rofi -show drun -config ~/.config/rofi/launchers/text/style_3.rasi"),
              lazy.spawn("dmenu_run -fn 'Source Code Pro -30'"),
             desc='Run Launcher'
              ),
@@ -54,40 +51,7 @@ keys = [
              ),
           Key([mod, "shift"], "e", lazy.spawn('firefox'), desc="Launches Firefox Web Browser"),
           Key([mod, "shift"], "f", lazy.spawn('pcmanfm'), desc="Launches File Manager"),
-         # Key([mod, "shift"], "c", lazy.spawn('google-chrome'), desc="Launches chrome"),(doesnt seem to work)
 
-
-         ### Switch focus to specific monitor (out of three)
-         Key([mod], "w",
-             lazy.to_screen(0),
-             desc='Keyboard focus to monitor 1'
-             ),
-         Key([mod], "e",
-             lazy.to_screen(1),
-             desc='Keyboard focus to monitor 2'
-             ),
-         Key([mod], "r",
-             lazy.to_screen(2),
-             desc='Keyboard focus to monitor 3'
-             ),
-         ### Switch focus of monitors
-         Key([mod], "period",
-             lazy.next_screen(),
-             desc='Move focus to next monitor'
-             ),
-         Key([mod], "comma",
-             lazy.prev_screen(),
-             desc='Move focus to prev monitor'
-             ),
-         ### Treetab controls
-          Key([mod, "shift"], "h",
-             lazy.layout.move_left(),
-             desc='Move up a section in treetab'
-             ),
-         Key([mod, "shift"], "l",
-             lazy.layout.move_right(),
-             desc='Move down a section in treetab'
-             ),
          ### Window controls
 
        Key([mod], "j",
@@ -123,11 +87,11 @@ keys = [
              lazy.window.toggle_floating(),
              desc='toggle floating'
              ),
-         Key([mod], "g",
-             lazy.window.toggle_fullscreen(),
-             desc='toggle fullscreen'
-             ),
-         ### Stack controls
+         # Key([mod], "g",
+         #    lazy.window.toggle_fullscreen(),
+         #    desc='toggle fullscreen'
+         #    ),
+         #### Stack controls
           Key([mod], "d",
              lazy.layout.next(),
              desc='Switch window focus to other pane(s) of stack'
@@ -136,24 +100,44 @@ keys = [
              lazy.layout.up(),
              desc='reverse of teh above command'
              ),
+         ### Switch focus to specific monitor (out of three)
+         Key([mod], "w",
+             lazy.to_screen(0),
+             desc='Keyboard focus to monitor 1'
+             ),
+         Key([mod], "e",
+             lazy.to_screen(1),
+             desc='Keyboard focus to monitor 2'
+             ),
+         Key([mod], "r",
+             lazy.to_screen(2),
+             desc='Keyboard focus to monitor 3'
+             ),
+         ### Switch focus of monitors
+         Key([mod], "period",
+             lazy.next_screen(),
+             desc='Move focus to next monitor'
+             ),
+         Key([mod], "comma",
+             lazy.prev_screen(),
+             desc='Move focus to prev monitor'
+             ),
 
-        ### Brightness, Alsa, Screenshots...
+    #Brightness, Alsa, Screenshots-------------------------------------------------------------------------
 
-    #Brightness
-
-  Key([], "XF86MonBrightnessUp", lazy.spawn("brightnessctl set 5%+")),
-  Key([], "XF86MonBrightnessDown", lazy.spawn("brightnessctl set 5%-")),
-
-	#Atalhos
-	  Key([], "Print", lazy.spawn("scrot -s ./screenshot/%Y-%m-%d-%T-screenshot.png")),
-      Key([mod], "Print", lazy.spawn("scrot ./screenshot/%Y-%m-%d-%T-screenshot.png")),
-	#Media Keys
-    Key([], "XF86AudioNext", lazy.spawn("playerctl next")),
-    Key([], "XF86AudioPrev", lazy.spawn("playerctl previous")),
-    Key([], "XF86AudioPlay", lazy.spawn("playerctl play-pause")),
-    Key([], "XF86AudioRaiseVolume", lazy.spawn("amixer set Master 5%+")),
-    Key([], "XF86AudioLowerVolume", lazy.spawn("amixer set Master 5%-")),
-    Key([], "XF86AudioMute", lazy.spawn("amixer -D pulse set Master 1+ toggle")),
+#####Brightness
+Key([], "XF86MonBrightnessUp", lazy.spawn("brightnessctl set 5%+")),
+Key([], "XF86MonBrightnessDown", lazy.spawn("brightnessctl set 5%-")),
+#####Screenshots
+Key([], "Print", lazy.spawn("scrot -s ./screenshot/%Y-%m-%d-%T-screenshot.png")),
+Key([mod], "Print", lazy.spawn("scrot ./screenshot/%Y-%m-%d-%T-screenshot.png")),
+#####Media Keys
+Key([], "XF86AudioNext", lazy.spawn("playerctl next")),
+Key([], "XF86AudioPrev", lazy.spawn("playerctl previous")),
+Key([], "XF86AudioPlay", lazy.spawn("playerctl play-pause")),
+Key([], "XF86AudioRaiseVolume", lazy.spawn("amixer set Master 5%+")),
+Key([], "XF86AudioLowerVolume", lazy.spawn("amixer set Master 5%-")),
+Key([], "XF86AudioMute", lazy.spawn("amixer -D pulse set Master 1+ toggle")),
 ]
 
 #Workspaces:
@@ -175,7 +159,7 @@ for i, (name, kwargs) in enumerate(group_names, 1):
 
 
 colors = [
- 	["#1E222A", "#1E222A"],  # 0 super dark one-dark background,very similar to the super dark nordic background      
+ 	["#1E222A", "#1E222A"],  # 0 super dark one-dark background,very similar to the super dark nordic background
 #	["#242831", "#242831"],  # 0 super dark nordic background
 	#["#2e3440", "#2e3440"], # 0 lighter dark nordic background(same color as nordic wallpaper backgrounds however)
 	["#3b4252", "#3b4252"],  # 1 background lighter
@@ -191,11 +175,10 @@ colors = [
 	["#d08770", "#d08770"],  # 11 orange
 	["#8fbcbb", "#8fbcbb"],  # 12 super cyan
 	["#5e81ac", "#5e81ac"],  # 13 super blue
-    ["#61afef", "#61afef"],  # 14 blue
-    ["#333945", "#333945"],  # 15 one dark black-bright(doom emac's highlighted text color)
+        ["#61afef", "#61afef"],  # 14 blue
+        ["#333945", "#333945"],  # 15 one dark black-bright(doom emac's highlighted text color)
 ]
 prompt = "{0}@{1}: ".format(os.environ["USER"], socket.gethostname())
-
 
 #Layouts:
 
@@ -206,43 +189,9 @@ layout_theme = {"border_width": 4,
                 }
 
 layouts = [
-    #layout.MonadWide(**layout_theme),
-    #layout.Max(**layout_theme),
-    #layout.Bsp(**layout_theme),
-    #layout.Stack(stacks=2, **layout_theme),
-    #layout.Columns(**layout_theme),
-    #layout.RatioTile(**layout_theme),
-    #layout.Tile(shift_windows=True, **layout_theme),
-    #layout.VerticalTile(**layout_theme),
-    #layout.Matrix(**layout_theme),
-    #layout.Zoomy(**layout_theme),
-    layout.MonadTall(**layout_theme,
-                      ratio=0.55,
-                     ),
+layout.MonadTall(**layout_theme,ratio=0.55,),
 layout.MonadWide(**layout_theme),
- layout.Max(**layout_theme),
-   # layout.RatioTile(**layout_theme),
-   # layout.Floating(**layout_theme),
-  #  layout.TreeTab(
-  #       font = "Ubuntu",
-   #      fontsize = 30,
-    #     sections = ["I", "II", "III"],
-     #    section_fontsize = 10,
-      #   border_width = 2,
-       #  bg_color = "434C5E",
-        # active_bg = "#81A1C1",
-#         active_fg = "000000",
- #        inactive_bg = "a9a1e1",
-  #       inactive_fg = "1c1f24",
-   #      padding_left = 0,
-    #     padding_x = 0,
-     #    padding_y = 5,
-      #   section_top = 10,
-       #  section_bottom = 20,
-        # level_shift = 8,
-#         vspace = 3,
- #        panel_width = 200
-  #       )
+layout.Max(**layout_theme),
 ]
 
 ##### DEFAULT WIDGET SETTINGS #####
@@ -256,13 +205,12 @@ widget_defaults = dict(
 extension_defaults = widget_defaults.copy()
 
 
-### Mouse_callback functions
+#### Mouse_callback functions
 
-#def open_launcher():
-#	qtile.cmd_spawn()
 def open_powermenu():
 	qtile.cmd_spawn("systemctl suspend")
 
+#### Widgets and Bar
 
 def init_widgets_list():
     widgets_list = [
@@ -271,199 +219,170 @@ def init_widgets_list():
                 background = colors[0]
             ),
 
-            # Left Side of the bar
-
-             widget.GroupBox(
-                       font = "Source Code Pro",
-                       disable_drag = True,
-                       fontsize = 18,
-                       margin_y = 3,
-                       margin_x = 15,
-                       padding_y = 2,
-                       padding_x = 0,
-                       borderwidth = 4,
-                       active = colors[2],
-                       inactive = colors[2],
-                       rounded = True,
-                       highlight_color = colors[1],
-                       highlight_method = "line",
-                       this_current_screen_border = colors[2],
-                       this_screen_border = colors [2],
-                       other_current_screen_border = colors[2],
-                       other_screen_border = colors[3],
-                       foreground = colors[2],
-                       background = colors[0]
-                       ),
- ### Centre of the bar----------------------------------------
-
- widget.Spacer(
-                length = 8,
-                background = colors[15]
-            ),
- #           widget.WidgetBox(
-  #              widgets=[
-            widget.TextBox(
-                font = "Iosevka Nerd Font",
-                fontsize = 18,
-                text = "",
-                foreground = colors[14],
-                background = colors[15]
-            ),
-            widget.CPU(
-                font = "Source Code Pro Medium",
-                format = "{load_percent}%",
-                fontsize = 16,
-                foreground = colors[14],
-                background = colors[15],
-                update_interval = 5
-            ),
-            widget.TextBox(
-                font = "Iosevka Nerd Font",
-                fontsize = 18,
-                text = "",
-                foreground = colors[5],
-                background = colors[15]
-            ),
-            widget.Memory(
-                font = "Source Code Pro Medium",
-                fontsize = 16,
-                format = "{MemUsed:.0f}{mm}",
-                foreground = colors[5],
-                background = colors[15],
-                update_interval = 5
-            ),
-            widget.TextBox(
-                font = "Iosevka Nerd Font",
-                fontsize = 17,
-                text = "",
-                foreground = colors[12],
-                background = colors[15]
-            ),
-            widget.NvidiaSensors(
-                   font = "Source Code Pro Medium",
-                fontsize = 16,
-                foreground = colors[12],
-                foreground_alert = colors[2],
-                background = colors[15],
-                update_interval = 5
-            ),
+# Left Side of the bar-------------------------------------
+widget.GroupBox(
+    font = "Source Code Pro",
+    disable_drag = True,
+    fontsize = 18,
+    margin_y = 3,
+    margin_x = 15,
+    padding_y = 2,
+    padding_x = 0,
+    borderwidth = 4,
+    active = colors[2],
+    inactive = colors[2],
+    rounded = True,
+    highlight_color = colors[1],
+    highlight_method = "line",
+    this_current_screen_border = colors[2],
+    this_screen_border = colors [2],
+    other_current_screen_border = colors[2],
+    other_screen_border = colors[3],
+    foreground = colors[2],
+    background = colors[0]
+),
+# Centre of the bar----------------------------------------
+widget.Spacer(
+    length = 8,
+    background = colors[15]
+),
+widget.TextBox(
+    font = "Iosevka Nerd Font",
+    fontsize = 18,
+    text = "",
+    foreground = colors[14],
+    background = colors[15]
+),
+widget.CPU(
+    font = "Source Code Pro Medium",
+    format = "{load_percent}%",
+    fontsize = 16,
+    foreground = colors[14],
+    background = colors[15],
+    update_interval = 5
+),
+widget.TextBox(
+    font = "Iosevka Nerd Font",
+    fontsize = 18,
+    text = "",
+    foreground = colors[5],
+    background = colors[15]
+),
+widget.Memory(
+    font = "Source Code Pro Medium",
+    fontsize = 16,
+    format = "{MemUsed:.0f}{mm}",
+    foreground = colors[5],
+    background = colors[15],
+    update_interval = 5
+),
+widget.TextBox(
+    font = "Iosevka Nerd Font",
+    fontsize = 17,
+    text = "",
+    foreground = colors[12],
+    background = colors[15]
+),
+widget.NvidiaSensors(
+    font = "Source Code Pro Medium",
+    fontsize = 16,
+    foreground = colors[12],
+    foreground_alert = colors[2],
+    background = colors[15],
+    update_interval = 5
+),
 widget.NetGraph(
-         background = colors[15]
-         ),#Icon:
- #widgetbox,remove this to enable               ]),
-#widget.WindowName(
- #       font = "Source Code Pro Medium",
-  #              fontsize = 16,
-   #             foreground = colors[12],
-    #            background = colors[1],
-     #           max_chars = 40,
-      #          ),
-        widget.Systray(
-                 background = colors[15]
-                ),
-        widget.Spacer(
-                length = bar.STRETCH,
-                background = colors[15]
-            ),
+    background = colors[15]
+),
+widget.Systray(
+    background = colors[15]
+),
+widget.Spacer(
+    length = bar.STRETCH,
+    background = colors[15]
+),
 ###Right-side of bar---------------------------------
-       widget.TextBox(
-                       text = "  ", #Arch icon: 
-                       padding = 2,
-                       foreground = colors[7],
-                       background = colors[0],
-                       fontsize = 17,
-                       font = "Iosevka Nerd Font",
-                       ),
-            widget.CurrentLayout(
-                font = "Source Code Pro Medium",
-                fontsize = 16,
-                foreground = colors[7],
-                background = colors[0]
-            ),
-
-           # there is a BatteryIcon widget that changes the battery icon as the battery gets depleted, implement it later.
-            widget.TextBox(
-                font="FontAwesome",
-                 text=" ",
-               foreground=colors[9],
-                background=colors[0],
-                padding = 0,
-                fontsize=18
-            ),
-            widget.Battery(
-                font="Noto Sans",
-                format = "{percent:2.0%}",
-                         update_interval = 60,
-                         fontsize = 16,
-                         foreground = colors[9],
-                        background = colors[0],
-	                     ),
-            widget.TextBox(
-               text = " Vol",
-               foreground = colors[8],
-                background = colors[0],
-                padding = 0,
-                fontsize=16
-                       ),
-              widget.Volume(
-                       foreground = colors[8],
-                       background = colors[0],
-                       padding = 5,
-                       fontsize = 16,
-                       update_interval = 0.1,
-                       step = 5
-                       ),
-  #          widget.TextBox(
-   #             font = "Iosevka Nerd Font",
-    #            fontsize = 18,
-     #           text = "",
-      #          foreground = colors[2],
-       #         background = colors[0]
-        #    ),
-            widget.TextBox(
-                font = "Iosevka Nerd Font",
-                fontsize = 18,
-                text = "",
-                foreground = colors[4],
-                background = colors[0]
-            ),
-            widget.Clock(
-                font = "Source Code Pro Medium",
-                format = '%a %d %b(%m)',
-                fontsize = 16,
-                foreground = colors[4],
-                background = colors[0]
-            ),
-            widget.Clock(
-                font = "Source Code Pro Medium",
-                format = '%I:%M:%S %p ',
-                fontsize = 16,
-                foreground = colors[4],
-                background = colors[0]
-            ),
-				widget.TextBox(
-					text="⏻",
-					foreground=colors[3],
-                    background=colors[0],
-					font="Font Awesome 5 Free Solid",
-					fontsize=23,
-					padding= 2,
-					mouse_callbacks={"Button1": open_powermenu},
-				),
-           widget.Spacer(
-                length = 5,
-                background = colors[0]
+widget.TextBox(
+    text = "  ",
+    padding = 2,
+    foreground = colors[7],
+    background = colors[0],
+    fontsize = 17,
+    font = "Iosevka Nerd Font",
+),
+widget.CurrentLayout(
+    font = "Source Code Pro Medium",
+    fontsize = 16,
+    foreground = colors[7],
+    background = colors[0]
+),
+widget.TextBox(
+    font="FontAwesome",
+    text=" ",
+    foreground=colors[9],
+    background=colors[0],
+    padding = 0,
+    fontsize=18
+),
+widget.Battery(
+    font="Noto Sans",
+    format = "{percent:2.0%}",
+    update_interval = 60,
+    fontsize = 16,
+    foreground = colors[9],
+    background = colors[0],
+),
+widget.TextBox(
+    text = " Vol",
+    foreground = colors[8],
+    background = colors[0],
+    padding = 0,
+    fontsize=16
+),
+widget.Volume(
+    foreground = colors[8],
+    background = colors[0],
+    padding = 5,
+    fontsize = 16,
+    update_interval = 0.1,
+    step = 5
+),
+widget.TextBox(
+    font = "Iosevka Nerd Font",
+    fontsize = 18,
+    text = "",
+    foreground = colors[4],
+    background = colors[0]
+),
+widget.Clock(
+    font = "Source Code Pro Medium",
+    format = '%a %d %b(%m)',
+    fontsize = 16,
+    foreground = colors[4],
+    background = colors[0]
+),
+widget.Clock(
+    font = "Source Code Pro Medium",
+    format = '%I:%M:%S %p ',
+    fontsize = 16,
+    foreground = colors[4],
+    background = colors[0]
+),
+widget.TextBox(
+    text="⏻",
+    foreground=colors[3],
+    background=colors[0],
+    font="Font Awesome 5 Free Solid",
+    fontsize=23,
+    padding= 2,
+    mouse_callbacks={"Button1": open_powermenu},
+),
+widget.Spacer(
+    length = 5,
+    background = colors[0]
             )
-        ]
+]
     return widgets_list
-
-#Decorations for bar:
-#        widget.TextBox(fontsize=25,
-#                       padding=0,text=' ',
-#                       foreground = colors[2],
-       #                background = colors[0]
-        #               ),
-
 
 # screens/bar
 
@@ -515,12 +434,10 @@ def switch_screens(qtile):
     qtile.current_screen.set_group(group)
 
 # assign apps to groups/workspace
-#
 @hook.subscribe.client_new
 def assign_app_group(client):
     d = {}
-
-    # assign deez apps
+# assign deez apps
     d[group_names[0][0]] = ['firefox']
     d[group_names[1][0]] = []
     d[group_names[2][0]] = []
@@ -584,4 +501,3 @@ def start_once():
 # We choose LG3D to maximize irony: it is a 3D non-reparenting WM written in
 # java that happens to be on java's whitelist.
 wmname = "LG3D"
-

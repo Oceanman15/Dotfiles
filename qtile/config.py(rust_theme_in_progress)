@@ -159,10 +159,11 @@ for i, (name, kwargs) in enumerate(group_names, 1):
 
 
 colors = [
- 	["#2b2724", "#2b2724"],  # 0 dark background
+ 	["#1E222A", "#1E222A"],  # 0 dark background
 	["#31627A", "#31627A"],  # 1 background lighter
 	["#7B4A31", "#7B4A31"],  # 2 foreground
         ["#2B2425", "#2B2425"],  # 3 brown-dark blue
+	["#5e81ac", "#5e81ac"],  # 4 super blue
 ]
 prompt = "{0}@{1}: ".format(os.environ["USER"], socket.gethostname())
 

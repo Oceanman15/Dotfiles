@@ -166,14 +166,13 @@ colors = [
         ["#7b4a31", "#7b4a31"],  # 4 copper/rusty color
     # Gruv color schemes:
         ["#282828", "#282828"],  # 5 gray(gruvbox background)
-        ["#e5e9f0", "#e5e9f0"],  # 6 white
+        ["#EBDBB2", "#EBDBB2"],  # 6 cream
         ["#8EC07C", "#8EC07C"],  # 7 green
         ["#B8BB26", "#B8BB26"],  # 8 light-green
         ["#FE8019", "#FE8019"],  # 9 orange
         ["#FB4934", "#FB4934"],  # 10 red
         ["#a2bab1", "#a2bab1"],  # 11 teal
         ["#FABD2F", "#FABD2F"],  # 12 yellow
-        ["#EBDBB2", "#EBDBB2"],  # 13 cream
 ]
 
 prompt = "{0}@{1}: ".format(os.environ["USER"], socket.gethostname())
@@ -250,14 +249,14 @@ widget.TextBox(
     font = "Iosevka Nerd Font",
     fontsize = 18,
     text = "",
-    foreground = colors[2],
+    foreground = colors[6],
     background = colors[0]
 ),
 widget.CPU(
     font = "Source Code Pro Medium",
     format = "{load_percent}%",
     fontsize = 16,
-    foreground = colors[2],
+    foreground = colors[6],
     background = colors[0],
     update_interval = 5
 ),
@@ -265,14 +264,14 @@ widget.TextBox(
     font = "Iosevka Nerd Font",
     fontsize = 18,
     text = "",
-    foreground = colors[2],
+    foreground = colors[8],
     background = colors[0]
 ),
 widget.Memory(
     font = "Source Code Pro Medium",
     fontsize = 16,
     format = "{MemUsed:.0f}{mm}",
-    foreground = colors[2],
+    foreground = colors[8],
     background = colors[0],
     update_interval = 5
 ),
@@ -280,14 +279,14 @@ widget.TextBox(
     font = "Iosevka Nerd Font",
     fontsize = 17,
     text = "",
-    foreground = colors[2],
+    foreground = colors[9],
     background = colors[0]
 ),
 widget.NvidiaSensors(
     font = "Source Code Pro Medium",
     fontsize = 16,
-    foreground = colors[2],
-    foreground_alert = colors[2],
+    foreground = colors[9],
+    foreground_alert = colors[9],
     background = colors[0],
     update_interval = 5
 ),

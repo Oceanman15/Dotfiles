@@ -159,8 +159,6 @@ for i, (name, kwargs) in enumerate(group_names, 1):
 
 colors = [
  	["#1E222A", "#1E222A"],  # 0 super dark one-dark background,very similar to the super dark nordic background
-#	["#242831", "#242831"],  # 0 super dark nordic background
-	#["#2e3440", "#2e3440"], # 0 lighter dark nordic background(same color as nordic wallpaper backgrounds however)
 	["#3b4252", "#3b4252"],  # 1 background lighter
 	["#81a1c1", "#81a1c1"],  # 2 foreground
 	["#bf616a", "#bf616a"],  # 3 red
@@ -174,8 +172,7 @@ colors = [
 	["#d08770", "#d08770"],  # 11 orange
 	["#8fbcbb", "#8fbcbb"],  # 12 super cyan
 	["#5e81ac", "#5e81ac"],  # 13 super blue
-        ["#61afef", "#61afef"],  # 14 blue
-        ["#333945", "#333945"],  # 15 one dark black-bright(doom emac's highlighted text color)
+        ["#333945", "#333945"],  # 14 one dark black-bright(doom emac's highlighted text color)
 ]
 prompt = "{0}@{1}: ".format(os.environ["USER"], socket.gethostname())
 
@@ -228,13 +225,13 @@ widget.GroupBox(
     padding_x = 0,
     borderwidth = 4,
     active = colors[2],
-    inactive = colors[2],
+    inactive = colors[7],
     rounded = True,
     highlight_color = colors[1],
     highlight_method = "line",
     this_current_screen_border = colors[2],
-    this_screen_border = colors [2],
-    other_current_screen_border = colors[2],
+    this_screen_border = colors [4],
+    other_current_screen_border = colors[8],
     other_screen_border = colors[3],
     foreground = colors[2],
     background = colors[0]
@@ -242,21 +239,21 @@ widget.GroupBox(
 # Centre of the bar----------------------------------------
 widget.Spacer(
     length = 8,
-    background = colors[15]
+    background = colors[14]
 ),
 widget.TextBox(
     font = "Iosevka Nerd Font",
     fontsize = 18,
     text = "",
-    foreground = colors[14],
-    background = colors[15]
+    foreground = colors[13],
+    background = colors[14]
 ),
 widget.CPU(
     font = "Source Code Pro Medium",
     format = "{load_percent}%",
     fontsize = 16,
-    foreground = colors[14],
-    background = colors[15],
+    foreground = colors[13],
+    background = colors[14],
     update_interval = 5
 ),
 widget.TextBox(
@@ -264,14 +261,14 @@ widget.TextBox(
     fontsize = 18,
     text = "",
     foreground = colors[5],
-    background = colors[15]
+    background = colors[14]
 ),
 widget.Memory(
     font = "Source Code Pro Medium",
     fontsize = 16,
     format = "{MemUsed:.0f}{mm}",
     foreground = colors[5],
-    background = colors[15],
+    background = colors[14],
     update_interval = 5
 ),
 widget.TextBox(
@@ -279,25 +276,25 @@ widget.TextBox(
     fontsize = 17,
     text = "",
     foreground = colors[12],
-    background = colors[15]
+    background = colors[14]
 ),
 widget.NvidiaSensors(
     font = "Source Code Pro Medium",
     fontsize = 16,
     foreground = colors[12],
     foreground_alert = colors[2],
-    background = colors[15],
+    background = colors[14],
     update_interval = 5
 ),
 widget.NetGraph(
-    background = colors[15]
+    background = colors[14]
 ),
 widget.Systray(
-    background = colors[15]
+    background = colors[14]
 ),
 widget.Spacer(
     length = bar.STRETCH,
-    background = colors[15]
+    background = colors[14]
 ),
 ###Right-side of bar---------------------------------
 widget.TextBox(

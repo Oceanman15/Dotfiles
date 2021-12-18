@@ -161,7 +161,7 @@ colors = [
         ["#333945", "#333945"],  # 0 one dark black-bright(doom emac's highlighted text color)
 	["#3b4252", "#3b4252"],  # 1 background lighter
 	["#81a1c1", "#81a1c1"],  # 2 foreground
-	["#bf616a", "#bf616a"],  # 3 red
+	["#ff6060", "#ff6060"],  # 3 red
 	["#a3be8c", "#a3be8c"],  # 4 green
 	["#ebcb8b", "#ebcb8b"],  # 5 yellow
 	["#81a1c1", "#81a1c1"],  # 6 blue

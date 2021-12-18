@@ -83,14 +83,14 @@ keys = [ ### Basics
              lazy.layout.maximize(),
              desc='toggle window between minimum and maximum sizes'
              ),
-         Key(["control", "shift"], "f",
+         Key([mod, "shift"], "g",
              lazy.window.toggle_floating(),
              desc='toggle floating'
              ),
-         # Key([mod], "g",
-         #    lazy.window.toggle_fullscreen(),
-         #    desc='toggle fullscreen'
-         #    ),
+          Key([mod], "g",
+             lazy.window.toggle_fullscreen(),
+             desc='toggle fullscreen'
+             ),
          #### Stack controls
           Key([mod], "d",
              lazy.layout.next(),
@@ -157,28 +157,29 @@ for i, (name, kwargs) in enumerate(group_names, 1):
     keys.append(Key([mod], str(i), lazy.group[name].toscreen()))        # Switch to another group
     keys.append(Key([mod, "shift"], str(i), lazy.window.togroup(name))) # Send current window to another group
 
-
 colors = [
- 	["#1E222A", "#1E222A"],  # 0 dark background
-	["#2b2724", "#2b2724"],  # 1 orange
-	["#C77750", "#C77750"],  # 2 foreground
-        ["#5e81ac", "#5e81ac"],  # 3 blue
-        ["#7b4a31", "#7b4a31"],  # 4 copper/rusty color
-    # Gruv color schemes:
-        ["#282828", "#282828"],  # 5 gray(gruvbox background)
-        ["#EBDBB2", "#EBDBB2"],  # 6 cream
-        ["#8EC07C", "#8EC07C"],  # 7 green
-        ["#B8BB26", "#B8BB26"],  # 8 light-green
-        ["#FE8019", "#FE8019"],  # 9 orange
-        ["#FB4934", "#FB4934"],  # 10 red
-        ["#a2bab1", "#a2bab1"],  # 11 teal
-        ["#FABD2F", "#FABD2F"],  # 12 yellow
+ 	["#1E222A", "#1E222A"],  # 0 super dark one-dark background,very similar to the super dark nordic background
+#	["#242831", "#242831"],  # 0 super dark nordic background
+	#["#2e3440", "#2e3440"], # 0 lighter dark nordic background(same color as nordic wallpaper backgrounds however)
+	["#3b4252", "#3b4252"],  # 1 background lighter
+	["#81a1c1", "#81a1c1"],  # 2 foreground
+	["#bf616a", "#bf616a"],  # 3 red
+	["#a3be8c", "#a3be8c"],  # 4 green
+	["#ebcb8b", "#ebcb8b"],  # 5 yellow
+	["#81a1c1", "#81a1c1"],  # 6 blue
+	["#d8dee9", "#d8dee9"],  # 7 white
+	["#88c0d0", "#88c0d0"],  # 8 cyan
+	["#b48ead", "#b48ead"],  # 9 magenta
+	["#4c566a", "#4c566a"],  # 10 grey
+	["#d08770", "#d08770"],  # 11 orange
+	["#8fbcbb", "#8fbcbb"],  # 12 super cyan
+	["#5e81ac", "#5e81ac"],  # 13 super blue
+        ["#61afef", "#61afef"],  # 14 blue
+        ["#333945", "#333945"],  # 15 one dark black-bright(doom emac's highlighted text color)
 ]
-
 prompt = "{0}@{1}: ".format(os.environ["USER"], socket.gethostname())
 
 #Layouts:
-
 layout_theme = {"border_width": 3,
                 "margin": 2,
                 "border_focus": "#5e81ac",
@@ -227,7 +228,7 @@ widget.GroupBox(
     padding_x = 0,
     borderwidth = 4,
     active = colors[2],
-    inactive = colors[4],
+    inactive = colors[2],
     rounded = True,
     highlight_color = colors[1],
     highlight_method = "line",
@@ -239,78 +240,70 @@ widget.GroupBox(
     background = colors[0]
 ),
 # Centre of the bar----------------------------------------
-widget.TextBox(
-    text = "",
-    fontsize = 20,
-    foreground = colors[3],
-    background = colors[0],
+widget.Spacer(
+    length = 8,
+    background = colors[15]
 ),
 widget.TextBox(
     font = "Iosevka Nerd Font",
     fontsize = 18,
     text = "",
-    foreground = colors[6],
-    background = colors[0]
+    foreground = colors[14],
+    background = colors[15]
 ),
 widget.CPU(
     font = "Source Code Pro Medium",
     format = "{load_percent}%",
     fontsize = 16,
-    foreground = colors[6],
-    background = colors[0],
+    foreground = colors[14],
+    background = colors[15],
     update_interval = 5
 ),
 widget.TextBox(
     font = "Iosevka Nerd Font",
     fontsize = 18,
     text = "",
-    foreground = colors[8],
-    background = colors[0]
+    foreground = colors[5],
+    background = colors[15]
 ),
 widget.Memory(
     font = "Source Code Pro Medium",
     fontsize = 16,
     format = "{MemUsed:.0f}{mm}",
-    foreground = colors[8],
-    background = colors[0],
+    foreground = colors[5],
+    background = colors[15],
     update_interval = 5
 ),
 widget.TextBox(
     font = "Iosevka Nerd Font",
     fontsize = 17,
     text = "",
-    foreground = colors[9],
-    background = colors[0]
+    foreground = colors[12],
+    background = colors[15]
 ),
 widget.NvidiaSensors(
     font = "Source Code Pro Medium",
     fontsize = 16,
-    foreground = colors[9],
-    foreground_alert = colors[9],
-    background = colors[0],
+    foreground = colors[12],
+    foreground_alert = colors[2],
+    background = colors[15],
     update_interval = 5
 ),
 widget.NetGraph(
-    background = colors[0]
+    background = colors[15]
 ),
 widget.Systray(
-    background = colors[0]
+    background = colors[15]
 ),
 widget.Spacer(
     length = bar.STRETCH,
-    background = colors[0]
-),
-widget.TextBox(
-    text = "",
-    fontsize = 20,
-    foreground = colors[3],
-    background = colors[0],
+    background = colors[15]
 ),
 ###Right-side of bar---------------------------------
 widget.TextBox(
     text = "  ",
     padding = 2,
-    foreground = colors[10],
+    foreground = colors[7],
     background = colors[0],
     fontsize = 17,
     font = "Iosevka Nerd Font",
@@ -318,13 +311,13 @@ widget.TextBox(
 widget.CurrentLayout(
     font = "Source Code Pro Medium",
     fontsize = 16,
-    foreground = colors[10],
+    foreground = colors[7],
     background = colors[0]
 ),
 widget.TextBox(
     font="FontAwesome",
     text=" ",
-    foreground=colors[12],
+    foreground=colors[9],
     background=colors[0],
     padding = 0,
     fontsize=18
@@ -334,18 +327,18 @@ widget.Battery(
     format = "{percent:2.0%}",
     update_interval = 60,
     fontsize = 16,
-    foreground = colors[12],
+    foreground = colors[9],
     background = colors[0],
 ),
 widget.TextBox(
     text = " Vol",
-    foreground = colors[7],
+    foreground = colors[8],
     background = colors[0],
     padding = 0,
     fontsize=16
 ),
 widget.Volume(
-    foreground = colors[7],
+    foreground = colors[8],
     background = colors[0],
     padding = 5,
     fontsize = 16,
@@ -356,26 +349,26 @@ widget.TextBox(
     font = "Iosevka Nerd Font",
     fontsize = 18,
     text = "",
-    foreground = colors[12],
+    foreground = colors[4],
     background = colors[0]
 ),
 widget.Clock(
     font = "Source Code Pro Medium",
     format = '%a %d %b(%m)',
     fontsize = 16,
-    foreground = colors[11],
+    foreground = colors[4],
     background = colors[0]
 ),
 widget.Clock(
     font = "Source Code Pro Medium",
     format = '%I:%M:%S %p ',
     fontsize = 16,
-    foreground = colors[11],
+    foreground = colors[4],
     background = colors[0]
 ),
 widget.TextBox(
     text="⏻",
-    foreground=colors[2],
+    foreground=colors[3],
     background=colors[0],
     font="Font Awesome 5 Free Solid",
     fontsize=23,
@@ -388,6 +381,7 @@ widget.Spacer(
             )
 ]
     return widgets_list
+
 
 # screens/bar
 

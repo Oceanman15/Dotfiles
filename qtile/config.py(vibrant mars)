@@ -237,7 +237,7 @@ widget.GroupBox(
     rounded = True,
     highlight_color = colors[0],
     highlight_method = "line",
-    this_current_screen_border = colors[2],
+    this_current_screen_border = colors[6],
     this_screen_border = colors [4],
     other_current_screen_border = colors[8],
     other_screen_border = colors[3],

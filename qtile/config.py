@@ -21,10 +21,7 @@ keys = [ ### Basics
              lazy.spawn(myTerm),
              desc='Launches My Terminal'
              ),
-         Key([mod], "space",
-             lazy.spawn("dmenu_run -fn 'Source Code Pro -30'"),
-            desc='Run Launcher'
-             ),
+  Key([mod], "space", lazy.spawn("rofi -show combi"), desc="spawn rofi"),
          Key([mod], "Tab",
              lazy.next_layout(),
              desc='Toggle through layouts'
@@ -54,23 +51,40 @@ keys = [ ### Basics
 
          ### Window controls
 
-       Key([mod], "j",
-             lazy.layout.shuffle_up(),
-             lazy.layout.section_up(),
-             desc='Move windows up in current stack'
-             ),
-         Key([mod], "k",
-             lazy.layout.shuffle_down(),
-             lazy.layout.section_down(),
-             desc='Move windows down in current stack'
-             ),
+       Key([mod], "h", lazy.layout.left(), desc="Move focus to left"),
+       Key([mod], "l", lazy.layout.right(), desc="Move focus to right"),
+       Key([mod], "j", lazy.layout.down(), desc="Move focus down"),
+       Key([mod], "k", lazy.layout.up(), desc="Move focus up"),
 
-         Key([mod], "h",
+
+
+    # Move windows between left/right columns or move up/down in current stack.
+    # Moving out of range in Columns layout will create new column.
+    Key([mod, "shift"], "h", lazy.layout.shuffle_left(), desc="Move window to the left"),
+    Key([mod, "shift"], "l", lazy.layout.shuffle_right(), desc="Move window to the right"),
+    Key([mod, "shift"], "j", lazy.layout.shuffle_down(),  desc="Move window down"),
+    Key([mod, "shift"], "k", lazy.layout.shuffle_up(), desc="Move window up"),
+
+    # Grow windows. If current window is on the edge of screen and direction
+    # will be to screen edge - window would shrink.
+    Key([mod, "control"], "h", lazy.layout.grow_left(), desc="Grow window to the left"),
+    Key([mod, "control"], "l", lazy.layout.grow_right(),  desc="Grow window to the right"),
+    Key([mod, "control"], "j", lazy.layout.grow_down(),  desc="Grow window down"),
+    Key([mod, "control"], "k", lazy.layout.grow_up(), desc="Grow window up"),
+   
+
+    Key(["mod4"], "space",  lazy.layout.toggle_split(), desc="Toggle between split and unsplit sides of stack"),
+    Key([mod, "shift", "control"], "h", lazy.layout.swap_column_left()),
+    Key([mod, "shift", "control"], "l", lazy.layout.swap_column_right()),
+    Key([mod, "shift"], "space", lazy.layout.flip()),
+
+
+         Key(["mod4"], "h",
              lazy.layout.shrink(),
              lazy.layout.decrease_nmaster(),
              desc='Shrink window (MonadTall), decrease number in master pane (Tile)'
              ),
-         Key([mod], "l",
+         Key(["mod4"], "l",
              lazy.layout.grow(),
              lazy.layout.increase_nmaster(),
              desc='Expand window (MonadTall), increase number in master pane (Tile)'
@@ -81,7 +95,7 @@ keys = [ ### Basics
              ),
          Key([mod], "m",
              lazy.layout.maximize(),
-             desc='toggle window between minimum and maximum sizes'
+             desc='window between minimum and maximum sizes'
              ),
          Key([mod, "shift"], "g",
              lazy.window.toggle_floating(),
@@ -186,7 +200,20 @@ layouts = [
 layout.MonadTall(**layout_theme,ratio=0.55,),
 layout.MonadWide(**layout_theme),
 layout.Max(**layout_theme),
+layout.Columns(**layout_theme),
+ layout.Stack(num_stacks=2,**layout_theme),
 ]
+
+floating_layout = layout.Floating(float_rules=[
+    # Run the utility of `xprop` to see the wm class and name of an X client.
+    *layout.Floating.default_float_rules,
+    Match(wm_class='confirmreset'),  # gitk
+    Match(wm_class='makebranch'),  # gitk
+    Match(wm_class='maketag'),  # gitk
+    Match(wm_class='ssh-askpass'),  # ssh-askpass
+    Match(title='branchdialog'),  # gitk
+    Match(title='pinentry'),  # GPG key password entry
+])
 
 ##### DEFAULT WIDGET SETTINGS #####
 widget_defaults = dict(
@@ -218,15 +245,9 @@ widget.Spacer(
     length = 5,
     background = colors[0]
             ),
-widget.TextBox(
-    text="⏻",
-    foreground=colors[8],
-    background=colors[0],
-    font="Font Awesome 5 Free Solid",
-    fontsize=23,
-    padding= 2,
-    mouse_callbacks={"Button1": open_powermenu},
-),
+
+
+widget.Image(filename='~/.config/qtile/eos-c.png', margin=3, background="#2f343f", mouse_callbacks={'Button1': lambda: qtile.cmd_spawn("rofi -show combi")}),
 widget.GroupBox(
     font = "Source Code Pro",
     disable_drag = True,
@@ -283,21 +304,6 @@ widget.Memory(
     background = colors[1],
     update_interval = 5
 ),
-widget.TextBox(
-    font = "Iosevka Nerd Font",
-    fontsize = 17,
-    text = "",
-    foreground = colors[12],
-    background = colors[1]
-),
-widget.NvidiaSensors(
-    font = "Source Code Pro Medium",
-    fontsize = 16,
-    foreground = colors[12],
-    foreground_alert = colors[2],
-    background = colors[1],
-    update_interval = 5
-),
 widget.NetGraph(
     background = colors[1]
 ),
@@ -340,11 +346,12 @@ widget.Battery(
     background = colors[0],
 ),
 widget.TextBox(
-    text = " Vol",
+    text = " ",
     foreground = colors[3],
     background = colors[0],
     padding = 0,
-    fontsize=16
+    fontsize=16,
+    mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn("pavucontrol")}
 ),
 widget.Volume(
     foreground = colors[3],
@@ -363,17 +370,14 @@ widget.TextBox(
 ),
 widget.Clock(
     font = "Source Code Pro Medium",
-    format = '%a %d %b(%m)',
+    format = ' %Y-%m-%d %a %I:%M %p',
     fontsize = 16,
     foreground = colors[6],
     background = colors[0]
 ),
-widget.Clock(
-    font = "Source Code Pro Medium",
-    format = '%I:%M:%S %p ',
-    fontsize = 16,
-    foreground = colors[13],
-    background = colors[0]
+  widget.TextBox(
+    text='',
+    mouse_callbacks= {'Button1':lambda: qtile.cmd_spawn(os.path.expanduser('~/.config/rofi/powermenu.sh'))}
 ),
 ]
     return widgets_list

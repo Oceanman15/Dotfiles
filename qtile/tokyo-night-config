@@ -5,7 +5,7 @@ import re
 import socket
 import subprocess
 from libqtile import qtile
-from libqtile.config import Click, Drag, Group, KeyChord, Key, Match, Screen
+from libqtile.config import Click, Drag, Group, KeyChord, Key, Match, Screen, ScratchPad, DropDown
 from libqtile.command import lazy
 from libqtile import layout, bar, widget, hook
 from libqtile.lazy import lazy
@@ -170,6 +170,23 @@ groups = [Group(name, **kwargs) for name, kwargs in group_names]
 for i, (name, kwargs) in enumerate(group_names, 1):
     keys.append(Key([mod], str(i), lazy.group[name].toscreen()))        # Switch to another group
     keys.append(Key([mod, "shift"], str(i), lazy.window.togroup(name))) # Send current window to another group
+    keys.append(Key([mod], "t", lazy.group["scratchpad"].dropdown_toggle("term")))
+    keys.append(Key([mod], "r", lazy.group["scratchpad"].dropdown_toggle("file")))
+
+
+# Append ScratchPad to groups list: 
+
+groups.append(
+        ScratchPad("scratchpad", [
+            DropDown("term", "alacritty", opacity = 0.8, height = 0.5 , width = 0.8),
+            DropDown("file", "term" + "-e ranger"),
+            ]), 
+        
+        )
+
+
+
+
 
 colors = [
     ["#24283b", "#24283b"],  # 0 Tokyo night background

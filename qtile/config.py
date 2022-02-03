@@ -5,7 +5,7 @@ import re
 import socket
 import subprocess
 from libqtile import qtile
-from libqtile.config import Click, Drag, Group, KeyChord, Key, Match, Screen
+from libqtile.config import Click, Drag, Group, KeyChord, Key, Match, Screen, ScratchPad, DropDown
 from libqtile.command import lazy
 from libqtile import layout, bar, widget, hook
 from libqtile.lazy import lazy
@@ -170,22 +170,35 @@ groups = [Group(name, **kwargs) for name, kwargs in group_names]
 for i, (name, kwargs) in enumerate(group_names, 1):
     keys.append(Key([mod], str(i), lazy.group[name].toscreen()))        # Switch to another group
     keys.append(Key([mod, "shift"], str(i), lazy.window.togroup(name))) # Send current window to another group
+    keys.append(Key([mod], "e", lazy.group["scratchpad"].dropdown_toggle("term")))
+    keys.append(Key([mod], "r", lazy.group["scratchpad"].dropdown_toggle("ranger")))
+
+
+# Append ScratchPad to groups list: 
+
+groups.append(
+        ScratchPad("scratchpad", [
+            DropDown("term", "alacritty", opacity = 1.0, height = 0.5 , width = 0.8),
+            DropDown('ranger', "alacritty -e'ranger'", width=0.7, height=0.7, x=0.15, y=0.15, opacity=1.0, on_focus_lost_hide=False), #figure sth out here. 
+            ]), 
+        
+        )
+
+
+
+
 
 colors = [
-        ["#333945", "#333945"],  # 0 one dark black-bright(doom emac's highlighted text color)
-	["#3b4252", "#3b4252"],  # 1 background lighter
-	["#81a1c1", "#81a1c1"],  # 2 foreground
-	["#ff6060", "#ff6060"],  # 3 red
-	["#a3be8c", "#a3be8c"],  # 4 green
-	["#ebcb8b", "#ebcb8b"],  # 5 yellow
-	["#81a1c1", "#81a1c1"],  # 6 blue
-	["#d8dee9", "#d8dee9"],  # 7 white
-	["#88c0d0", "#88c0d0"],  # 8 cyan
-	["#b48ead", "#b48ead"],  # 9 magenta
-	["#4c566a", "#4c566a"],  # 10 grey
-	["#d08770", "#d08770"],  # 11 orange
-	["#8fbcbb", "#8fbcbb"],  # 12 super cyan
-	["#5e81ac", "#5e81ac"],  # 13 super blue
+    ["#24283b", "#24283b"],  # 0 Tokyo night background
+	["#1a1b26", "#1a1b26"],  # 1 background of tokyo night darker
+	["#c0caf5", "#c0caf5"],  # 2 white
+	["#f7768e", "#f7768e"],  # 3 red
+	["#9ece6a", "#9ece6a"],  # 4 green
+	["#d08770", "#d08770"],  # 5 orange
+	["#7dcfff", "#7dcfff"],  # 6 blue
+	["#7aa2f7", "#7aa2f7"],  # 7 blue-purple
+	["#bb9af7", "#bb9af7"],  # 8 purple
+	["#a9b1d6", "#a9b1d6"],  # 9 Tokyo night editor foreground
 ]
 prompt = "{0}@{1}: ".format(os.environ["USER"], socket.gethostname())
 
@@ -257,13 +270,13 @@ widget.GroupBox(
     padding_y = 2,
     padding_x = 0,
     borderwidth = 4,
-    active = colors[2],
-    inactive = colors[7],
+    active = colors[7],
+    inactive = colors[2],
     rounded = True,
     highlight_color = colors[1],
     highlight_method = "line",
-    this_current_screen_border = colors[2],
-    this_screen_border = colors [4],
+    this_current_screen_border = colors[7],
+    this_screen_border = colors [8],
     other_current_screen_border = colors[8],
     other_screen_border = colors[3],
     foreground = colors[2],
@@ -272,44 +285,15 @@ widget.GroupBox(
 # Centre of the bar----------------------------------------
 widget.Spacer(
     length = 8,
-    background = colors[1]
-),
-widget.TextBox(
-    font = "Iosevka Nerd Font",
-    fontsize = 18,
-    text = "",
-    foreground = colors[5],
-    background = colors[1]
-),
-widget.CPU(
-    font = "Source Code Pro Medium",
-    format = "{load_percent}%",
-    fontsize = 16,
-    foreground = colors[5],
-    background = colors[1],
-    update_interval = 5
-),
-widget.TextBox(
-    font = "Iosevka Nerd Font",
-    fontsize = 18,
-    text = "",
-    foreground = colors[4],
-    background = colors[1]
-),
-widget.Memory(
-    font = "Source Code Pro Medium",
-    fontsize = 16,
-    format = "{MemUsed:.0f}{mm}",
-    foreground = colors[4],
-    background = colors[1],
-    update_interval = 5
+    background = colors[0]
 ),
 widget.NetGraph(
-    background = colors[1]
+    background = colors[0]
 ),
 widget.Systray(
-    background = colors[1]
+    background = colors[0]
 ),
+widget.WindowTabs(),
 widget.Spacer(
     length = bar.STRETCH,
     background = colors[1]
@@ -318,7 +302,7 @@ widget.Spacer(
 widget.TextBox(
     text = "  ",
     padding = 2,
-    foreground = colors[4],
+    foreground = colors[3],
     background = colors[0],
     fontsize = 17,
     font = "Iosevka Nerd Font",
@@ -326,13 +310,13 @@ widget.TextBox(
 widget.CurrentLayout(
     font = "Source Code Pro Medium",
     fontsize = 16,
-    foreground = colors[4],
+    foreground = colors[3],
     background = colors[0]
 ),
 widget.TextBox(
     font="FontAwesome",
     text=" ",
-    foreground=colors[11],
+    foreground=colors[5],
     background=colors[0],
     padding = 0,
     fontsize=18
@@ -342,42 +326,46 @@ widget.Battery(
     format = "{percent:2.0%}",
     update_interval = 60,
     fontsize = 16,
-    foreground = colors[11],
+    foreground = colors[5],
     background = colors[0],
 ),
+    widget.TextBox(
+        text="",
+        foreground = colors[4],
+        background = colors[0],
+    ),
+    widget.Backlight(
+        foreground = colors[4],
+        background = colors[0],
+        backlight_name="intel_backlight",
+    ),
 widget.TextBox(
     text = " ",
-    foreground = colors[3],
+    foreground = colors[6],
     background = colors[0],
     padding = 0,
     fontsize=16,
     mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn("pavucontrol")}
 ),
 widget.Volume(
-    foreground = colors[3],
+    foreground = colors[6],
     background = colors[0],
     padding = 5,
     fontsize = 16,
     update_interval = 0.1,
     step = 5
 ),
-widget.TextBox(
-    font = "Iosevka Nerd Font",
-    fontsize = 18,
-    text = "",
-    foreground = colors[4],
-    background = colors[0]
-),
 widget.Clock(
     font = "Source Code Pro Medium",
-    format = ' %Y-%m-%d %a %I:%M %p',
+    format = '  %Y-%m-%d %a %I:%M %p',
     fontsize = 16,
-    foreground = colors[6],
+    foreground = colors[8],
     background = colors[0]
 ),
   widget.TextBox(
     text='',
-    mouse_callbacks= {'Button1':lambda: qtile.cmd_spawn(os.path.expanduser('~/.config/rofi/powermenu.sh'))}
+    mouse_callbacks= {'Button1':lambda: qtile.cmd_spawn(os.path.expanduser('~/.config/rofi/powermenu.sh'))},
+    foreground = colors[9],
 ),
 ]
     return widgets_list

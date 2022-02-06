@@ -171,17 +171,16 @@ for i, (name, kwargs) in enumerate(group_names, 1):
     keys.append(Key([mod], str(i), lazy.group[name].toscreen()))        # Switch to another group
     keys.append(Key([mod, "shift"], str(i), lazy.window.togroup(name))) # Send current window to another group
     keys.append(Key([mod], "e", lazy.group["scratchpad"].dropdown_toggle("term")))
-    keys.append(Key([mod], "r", lazy.group["scratchpad"].dropdown_toggle("ranger")))
+    keys.append(Key([mod], "f", lazy.group["scratchpad"].dropdown_toggle("ranger")))
 
 
 # Append ScratchPad to groups list: 
 
 groups.append(
         ScratchPad("scratchpad", [
-            DropDown("term", "alacritty", opacity = 1.0, height = 0.5 , width = 0.8),
+            DropDown("term", "alacritty", width=0.7, height=0.7, x=0.15, y=0.15, opacity=1.0, on_focus_lost_hide=False),
             DropDown('ranger', "alacritty -e'ranger'", width=0.7, height=0.7, x=0.15, y=0.15, opacity=1.0, on_focus_lost_hide=False), #figure sth out here. 
-            ]), 
-        
+            ]),        
         )
 
 
@@ -205,7 +204,7 @@ prompt = "{0}@{1}: ".format(os.environ["USER"], socket.gethostname())
 #Layouts:
 layout_theme = {"border_width": 3,
                 "margin": 2,
-                "border_focus": "#5e81ac",
+                "border_focus": "#7aa2f7",
                 "border_normal": "#1E222A",
                 }
 
@@ -293,11 +292,15 @@ widget.NetGraph(
 widget.Systray(
     background = colors[0]
 ),
-widget.WindowTabs(),
-widget.Spacer(
-    length = bar.STRETCH,
-    background = colors[1]
-),
+widget.TaskList(
+   border = colors[7],
+   font = "Source Code Pro Medium",
+   hightlight_method = "block", 
+    ),
+#widget.Spacer(
+#    length = bar.STRETCH,
+#    background = colors[1]
+#),
 ###Right-side of bar---------------------------------
 widget.TextBox(
     text = "  ",
@@ -357,7 +360,7 @@ widget.Volume(
 ),
 widget.Clock(
     font = "Source Code Pro Medium",
-    format = '  %Y-%m-%d %a %I:%M %p',
+    format = '  %d-%m %Y %a %I:%M %p',
     fontsize = 16,
     foreground = colors[8],
     background = colors[0]
@@ -371,7 +374,7 @@ widget.Clock(
     return widgets_list
 
 
-# screens/bar
+# screens/bar (need to make changes to the code in the future)
 
 def init_widgets_screen1():
     widgets_screen1 = init_widgets_list()

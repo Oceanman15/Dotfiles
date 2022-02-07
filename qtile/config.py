@@ -178,7 +178,7 @@ for i, (name, kwargs) in enumerate(group_names, 1):
 
 groups.append(
         ScratchPad("scratchpad", [
-            DropDown("term", "alacritty", width=0.7, height=0.7, x=0.15, y=0.15, opacity=1.0, on_focus_lost_hide=False),
+            DropDown("term", "alacritty", width=0.8, height=0.4),
             DropDown('ranger', "alacritty -e'ranger'", width=0.7, height=0.7, x=0.15, y=0.15, opacity=1.0, on_focus_lost_hide=False), #figure sth out here. 
             ]),        
         )

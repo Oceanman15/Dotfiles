@@ -23,7 +23,7 @@ filetype plugin on
 filetype indent on
 
 " Turn syntax highlighting on/off(great for programming)
- syntax off
+ syntax on
 
 " Add numbers to the file.
 set number
@@ -88,8 +88,10 @@ set history=1000
 "Spell-checker:
 "set spell spelllang=en_au
 
+"Enables mouse:
+set mouse=a
 
-" PLUGINS ---------------------------------------------------------------- {{{
+" PLUGINS ----------------------------------------------------------------
 
 call plug#begin('~/.vim/plugged')
 
@@ -97,7 +99,6 @@ call plug#begin('~/.vim/plugged')
 "Plug 'scrooloose/nerdtree'                         " Nerdtree
   Plug 'itchyny/lightline.vim'
     Plug 'gmarik/Vundle.vim'                           " Vundle, package manager
-    Plug 'suan/vim-instant-markdown', {'rtp': 'after'} " Markdown Preview
     Plug 'frazrepo/vim-rainbow'
     "Plug  'chrisbra/vim-autosave'
 
@@ -106,9 +107,13 @@ call plug#begin('~/.vim/plugged')
     Plug 'tiagofumo/vim-nerdtree-syntax-highlight'     " Highlighting Nerdtree
     Plug 'ryanoasis/vim-devicons'                      " Icons for Nerdtree
 "{{ Productivity }}
-    Plug 'vimwiki/vimwiki'                             " VimWiki 
+    Plug 'godlygeek/tabular'
+    Plug 'preservim/vim-markdown'
+    let g:vim_markdown_folding_disabled = 1
+    let g:vim_markdown_toc_autofit = 1
+    Plug 'preservim/tagbar'
     Plug 'jreybert/vimagit'                            " Magit-like plugin for vim
-"{{ Tim Pope Plugins }}
+    "{{ Tim Pope Plugins }}
     "Plug 'tpope/vim-surround'                          " Change surrounding marks for code like [({
 
 "{{ Syntax Highlighting and Colors }}
@@ -121,8 +126,9 @@ call plug#begin('~/.vim/plugged')
 call plug#end()
 
 " }}}
+"
 
-" MAPPINGS --------------------------------------------------------------- {{{
+" MAPPINGS --------------------------------------------------------------- 
 " Set space as the leader key Reason why it looks so weird is for mac compatability
 nnoremap <Space> <Nop>
 let mapleader = "\<Space>"
@@ -144,8 +150,9 @@ noremap <leader>/ :/\%.l
 nnoremap o o<esc>
 nnoremap O O<esc>
 
-"yank to system clipboard(not needed for mac)
-"nnoremap <leader>y "+y
+"yank and paste to system clipboard for linux
+"nnoremap <C-C> "*y
+"nnoremap <C-V> "*p
 
 " Center the cursor vertically when moving to the next word during a search.
 nnoremap n nzz
@@ -171,27 +178,24 @@ nnoremap <c-k> <c-w>k
 nnoremap <c-h> <c-w>h
 nnoremap <c-l> <c-w>l
 
-" Resize split windows using arrow keys by pressing:
-" CTRL+UP, CTRL+DOWN, CTRL+LEFT, or CTRL+RIGHT.
-noremap <c-up> <c-w>+
-noremap <c-down> <c-w>-
-noremap <c-left> <c-w>>
-noremap <c-right> <c-w><
-
 " NERDTree specific mappings.
 " Map the F3 key to toggle NERDTree open and close.
 nnoremap <leader>t :NERDTreeToggle<cr>
 
 "For spellchecker automation:
-nnoremap <leader>s ]sz=
-nnoremap <leader>S [sz=
+"nnoremap <leader>s ]sz=
+"nnoremap <leader>S [sz=
 
 " Have nerdtree ignore certain files and directories.
 let NERDTreeIgnore=['\.git$', '\.mp4$', '\.ogg$', '\.iso$', '\.pyc$', '\.odt$', '\.gif$', '\.db$']
 " if you are a coder, you probably wnt to include these: '\.jpg$', '\.pdf$', '\.png$', 
 " }}}
 
-" VIMSCRIPT -------------------------------------------------------------- {{{
+"Tagbar toggle:" like obsidian table of contents toggle. 
+nmap <c-f> :Toc<CR>    
+
+
+" VIMSCRIPT -------------------------------------------------------------- 
 
 " color scheme
 "col"orscheme onedark
@@ -226,9 +230,10 @@ endif
 augroup cursor_off
 augroup END
 
-" }}}
+"Vim-markdown ------------------------------------------------------------
 
-" STATUS LINE ------------------------------------------------------------ {{{
+
+" STATUS LINE ------------------------------------------------------------ 
 
 " Clear status line when vimrc is reloaded.
 set statusline=
@@ -246,17 +251,13 @@ set statusline+=%=
 set laststatus=2
 
 " }}}
-" Vifm  ------------------------------------------------------------ {{{
+" Vifm  ------------------------------------------------------------ 
 
 map <Leader>vv :Vifm<CR>
 map <Leader>vs :VsplitVifm<CR>
 map <Leader>sp :SplitVifm<CR>
 map <Leader>dv :DiffVifm<CR>
 map <Leader>tv :TabVifm<CR>
-
-" VimWiki """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:vimwiki_list = [{'path': '~/vimwiki/',
-                      \ 'syntax': 'markdown', 'ext': '.md'}]
 
 " Vim-Instant-Markdown  """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:instant_markdown_autostart = 0         " Turns off auto preview

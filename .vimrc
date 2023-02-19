@@ -192,7 +192,7 @@ let NERDTreeIgnore=['\.git$', '\.mp4$', '\.ogg$', '\.iso$', '\.pyc$', '\.odt$', 
 " }}}
 
 "Tagbar toggle:" like obsidian table of contents toggle. 
-nmap <c-f> :Toc<CR>    
+nnnoremap <c-f> :Toc<CR>    
 
 
 " VIMSCRIPT -------------------------------------------------------------- 
